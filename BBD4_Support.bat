@@ -1,8 +1,9 @@
 @echo off
 cls
 :MENU
+cls
 echo.
-echo *** VERSION 0.7 ***
+echo *** IRON-MARK-BATON 8 ***
 echo *** Samuraa1 Support (Made by BBD4) ***
 echo.
 echo  @@@@@@ @@@  @@@ @@@@@@@  @@@@@@@   @@@@@@  @@@@@@@  @@@@@@@    @@@@@@@  @@@@@@@  @@@@@@@  @@@  @@@ 
@@ -18,7 +19,7 @@ echo 4. Download and Install Better Celery
 echo 5. Download and Install Solara
 echo 6. Download and Install Planet VPN (Fix Error 403/etc access)
 echo 7. Download and Install Node.js (Fix tabs on Solara/Wave/Celery)
-echo 8. Software autofix with % (Celery, Solara)
+echo 8. Downgrade Roblox (Bloxstrap)
 echo 9. Exit
 echo.
 set /p choice=Select (1-9): 
@@ -37,12 +38,17 @@ goto MENU
 
 :FIX_ROBLOX_VERSION_MISMATCH
 cls
-echo *** Fixing Roblox Version Mismatch! ***
+echo *** LOADING ***
 echo.
-REM Replace with actual commands if necessary
-echo Attempting to fix Roblox version mismatch...
+
+REM Скачиваем файл напрямую с GitHub
+powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ActualMasterOogway/Roblox-Downgrader/main/RobloxDowngrader.exe' -OutFile '%temp%\RobloxDowngrader.exe'; Start-Process '%temp%\RobloxDowngrader.exe' -Wait"
+
+REM Выполнение действий по исправлению версии Roblox
+echo IRON-MARK-BATON 8: SUCCESSFULLY! BYE-BYE
 pause
 goto MENU
+
 
 :INSTALL_SOLARA
 cls
@@ -142,10 +148,11 @@ goto MENU
 :INSTALL_BLOXSTRAP
 cls
 echo *** Downloading and Installing Bloxstrap ***
-powershell -Command "Invoke-WebRequest -Uri 'https://github.com/pizzaboxer/bloxstrap/releases/download/v2.7.0/Bloxstrap-v2.7.0.exe' -OutFile '%temp%\Bloxstrap-v2.7.0.exe'; Start-Process '%temp%\Bloxstrap-v2.7.0.exe' -Wait"
+powershell -Command "Invoke-WebRequest -Uri 'https://github.com/pizzaboxer/bloxstrap/releases/download/v2.7.0/Bloxstrap-v2.7.0.exe' -OutFile '%temp%\Bloxstrap-v2.7.0.exe'; Start-Process '%temp%\Bloxstrap-v2.7.0.exe'"
 echo Bloxstrap installation completed!
 pause
 goto MENU
+
 
 :MAKE_BLOXSTRAP_CON
 cls
