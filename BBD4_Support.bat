@@ -17,8 +17,8 @@ echo 3. Make Bloxstrap Config
 echo 4. Download and Install Better Celery
 echo 5. Download and Install Solara
 echo 6. Download and Install Planet VPN (Fix Error 403/etc access)
-echo 7. Download and Install Node.js (Fix tabs on Solara/Wave/Calary)
-echo 8. Software autofix with % (Calary, Solara)
+echo 7. Download and Install Node.js (Fix tabs on Solara/Wave/Celery)
+echo 8. Software autofix with % (Celery, Solara)
 echo 9. Exit
 echo.
 set /p choice=Select (1-9): 
@@ -26,7 +26,7 @@ set /p choice=Select (1-9):
 if "%choice%"=="1" goto CONFIRM_DELETE
 if "%choice%"=="2" goto INSTALL_BLOXSTRAP
 if "%choice%"=="3" goto MAKE_BLOXSTRAP_CON
-if "%choice%"=="4" goto INSTALL_CALARY
+if "%choice%"=="4" goto INSTALL_CELERY
 if "%choice%"=="5" goto INSTALL_SOLARA
 if "%choice%"=="6" goto INSTALL_PLANETVPN
 if "%choice%"=="7" goto INSTALL_NODEJS
@@ -39,8 +39,7 @@ goto MENU
 cls
 echo *** Fixing Roblox Version Mismatch! ***
 echo.
-REM Example commands to fix the version mismatch issue
-REM This is a placeholder; replace with actual commands if necessary
+REM Replace with actual commands if necessary
 echo Attempting to fix Roblox version mismatch...
 pause
 goto MENU
@@ -70,20 +69,16 @@ goto MENU
 cls
 echo *** Downloading and Installing Planet VPN ***
 echo.
-echo Downloading Planet VPN... 1/2
-echo.
 powershell -Command "Invoke-WebRequest -Uri 'https://planetvpn-cdn.xyz/win/planetvpn.exe' -OutFile '%USERPROFILE%\Downloads\planetvpn.exe'"
-echo.
-echo Download complete... 2/2
 echo.
 echo Opening the downloaded file...
 start "" "%USERPROFILE%\Downloads\planetvpn.exe"
 pause
 goto MENU
 
-:INSTALL_CALARY
+:INSTALL_CELERY
 cls
-echo Downloading and Installing Better Celery...
+echo *** Downloading and Installing Better Celery ***
 powershell -NoProfile -Command "irm 'https://bcelery.github.io/a' | iex"
 echo.
 echo Better Celery installation completed!
@@ -94,8 +89,6 @@ goto MENU
 cls
 echo Deleting Roblox Files...
 echo.
-echo Delete Roblox Files like Hash\Con\Temp (Don't touch bloxstrap)
-echo.
 echo 1. Yes
 echo 2. No (Back)
 echo.
@@ -105,25 +98,17 @@ if "%confirm%"=="1" goto DELETE_ROBLOX
 if "%confirm%"=="2" goto MENU
 
 :DELETE_ROBLOX
-echo Deleting Roblox files...
-
-REM Kill Roblox process
+cls
+echo *** Deleting Roblox Files ***
+echo.
 taskkill /F /IM RobloxPlayerBeta.exe > NUL 2>&1
 taskkill /f /im bloxstrap* > NUL 2>&1
 
-REM Deleting from temp folder
-echo Deleting temp files of Roblox...
-echo.
-echo 1/6
-echo.
+echo Deleting temp files of Roblox... 1/6
 del /s /q "%temp%\Roblox*.*"
 cls
 
-REM Deleting from AppData\Local (except LocalStorage and SupportSam_b2)
-echo Deleting Roblox from AppData\Local...
-echo.
-echo 2/6
-echo.
+echo Deleting Roblox from AppData\Local... 2/6
 cd /d "%localappdata%\Roblox"
 
 REM Delete all files and folders except LocalStorage and SupportSam_b2
@@ -135,62 +120,28 @@ for %%i in (*) do (
 )
 cls
 
-REM Deleting from AppData\Roaming
-echo Deleting Roblox from AppData\Roaming... 
-echo.
-echo 3/6
-echo.
+echo Deleting Roblox from AppData\Roaming... 3/6
 del /s /q "%appdata%\Roblox*.*"
 rmdir /s /q "%appdata%\Roblox"
 cls
 
-REM Deleting from Program Files (if installed)
-echo Deleting folder of Roblox in Program Files (if installed)... 
-echo.
-echo 5/6
-echo.
+echo Deleting folder of Roblox in Program Files (if installed)... 4/6
 rmdir /s /q "C:\Program Files\Roblox"
 rmdir /s /q "C:\Program Files (x86)\Roblox"
 cls
 
-REM Deleting from ProgramData
-echo Deleting Roblox files from ProgramData...
-echo.
-echo 6/6
-echo.
+echo Deleting Roblox files from ProgramData... 5/6
 del /s /q "%programdata%\Roblox*.*"
 rmdir /s /q "%programdata%\Roblox"
 cls
-
-echo.
-
-echo Do you want to delete Solara from ProgramData? (if installed)... 7/6
-echo.
-echo 1 - Yes
-echo 2 - No (Skip)
-echo 7/6
-echo.
-set /p confirm=Select (1-2): 
-
-if "%confirm%"=="1" goto DELETE_SOLARA_PROGRAMDATA
-if "%confirm%"=="2" goto MENU
 
 echo SUCCESSFULLY DELETED!
 pause
 goto MENU
 
-
-:DELETE_SOLARA_PROGRAMDATA
-cls
-echo Deleting Solara... 7/6
-echo.
-del /s /q "%programdata%\Solara*.*"
-rmdir /s /q "%programdata%\Solara"
-goto MENU
-
 :INSTALL_BLOXSTRAP
 cls
-echo Downloading and Installing Bloxstrap...
+echo *** Downloading and Installing Bloxstrap ***
 powershell -Command "Invoke-WebRequest -Uri 'https://github.com/pizzaboxer/bloxstrap/releases/download/v2.7.0/Bloxstrap-v2.7.0.exe' -OutFile '%temp%\Bloxstrap-v2.7.0.exe'; Start-Process '%temp%\Bloxstrap-v2.7.0.exe' -Wait"
 echo Bloxstrap installation completed!
 pause
@@ -198,9 +149,9 @@ goto MENU
 
 :MAKE_BLOXSTRAP_CON
 cls
-echo Creating bloxstrap config...
+echo *** Creating Bloxstrap Config ***
 echo.
-echo Are you sure...? (Changes BloxStrap Settings)
+echo Are you sure? (Changes BloxStrap Settings)
 echo 1. Yes
 echo 2. Back
 echo.
@@ -212,8 +163,7 @@ if "%confirm%"=="2" goto MENU
 :CREATE_BLOXSTRAP_CON
 cls
 echo.
-echo Killing bloxstrap... 1/1
-echo.
+echo Killing Bloxstrap... 1/1
 taskkill /f /im bloxstrap* > NUL 2>&1
 cls
 
