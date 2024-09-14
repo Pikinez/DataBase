@@ -4,10 +4,10 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 echo /====================================================\
-echo             *** IRON-MARK-BATON 8.6 ***                 
+echo             *** IRON-MARK-BATON 8.8 ***                 
 echo        *** Samuraa1 Support (Made by BBD4) ***             
 echo \====================================================/
-echo     _____________________________________________
+echo     ______________________________________________
 echo     \'########::'########::'########::'##::::::::/
 echo     / ##.... ##: ##.... ##: ##.... ##: ##:::'##::\
 echo     \ ##:::: ##: ##:::: ##: ##:::: ##: ##::: ##::/
@@ -18,9 +18,9 @@ echo     \ ########:: ########:: ########:::::::: ##::/
 echo     /........:::........:::........:::::::::..:::\ 
 echo     \____________________________________________/
 echo.
-echo                  __              __
-echo                 /+\\ Options Or /+\\
-echo                 \_// Functions  \_//
+echo                   __              __
+echo                  //+\ Options Or /+\\
+echo                  \\_/ Functions  \_//
 echo.
 echo     1. Delete AppData\Hash\Con\Trash files of Roblox\Exploits
 echo     2. Download and Install\open Latest Bloxstrap Version
@@ -28,12 +28,14 @@ echo     3. Make Bloxstrap Config
 echo     4. Download and Open Better Celery Exploit
 echo     5. Download SolaraV3 Exploit
 echo     6. Download and Install Nezur Exploit 
-echo     7. Download and Install Planet VPN (Fix Error 403/etc access)
+echo     7. Show list of VPN's downloads (Fix Error 403/etc access)
 echo     8. Download and Install Node.js (Fix tabs on exploit)
-echo     9. Downgrade Roblox (Bloxstrap)
-echo    10. Exit
+echo     9. Downgrade Roblox Version (Bloxstrap)
+echo    10. ...
+echo    11. Join Discord server Samuraa1 Community (If you want L:D )
+echo    12. Exit
 echo.
-set /p choice=Select (1-10): 
+set /p choice=Select (1-12): 
 
 if "%choice%"=="1" goto CONFIRM_DELETE
 if "%choice%"=="2" goto INSTALL_BLOXSTRAP
@@ -41,10 +43,12 @@ if "%choice%"=="3" goto MAKE_BLOXSTRAP_CON
 if "%choice%"=="4" goto INSTALL_CELERY
 if "%choice%"=="5" goto INSTALL_SOLARA
 if "%choice%"=="6" goto INSTALL_NEZUR
-if "%choice%"=="7" goto INSTALL_PLANETVPN
+if "%choice%"=="7" goto INSTALL_VPN
 if "%choice%"=="8" goto INSTALL_NODEJS
 if "%choice%"=="9" goto FIX_ROBLOX_VERSION_MISMATCH
 if "%choice%"=="10" goto END
+if "%choice%"=="11" goto JOIN_DISCORD
+if "%choice%"=="12" goto END
 
 goto MENU
 
@@ -54,13 +58,45 @@ echo /====================================================\
 echo    *** Downloading and Installing Nezur Executor ***
 echo \====================================================/
 echo.
+
+:: Check if PowerShell path is defined, else use default
+if not defined powershellPath set powershellPath=%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe
+
+:: Download Nezur Executor
+echo Downloading Nezur Executor...
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://nezur.io/Nezur_Executor.zip' -OutFile '%temp%\Nezur_Executor.zip'"
-powershell -Command "Expand-Archive -Path '%temp%\Nezur_Executor.zip' -DestinationPath '%temp%\Nezur_Executor'"
+if %ERRORLEVEL% neq 0 (
+    echo Error: Failed to download Nezur Executor.
+    pause
+    goto MENU
+)
+
+:: Extract the downloaded zip file
+echo Extracting Nezur Executor...
+"%powershellPath%" -Command "Expand-Archive -Path '%temp%\Nezur_Executor.zip' -DestinationPath '%temp%\Nezur_Executor' -Force"
+if %ERRORLEVEL% neq 0 (
+    echo Error: Failed to extract Nezur Executor.
+    pause
+    goto MENU
+)
+
+:: Start Nezur Executor
+echo Starting Nezur Executor...
 start "" "%temp%\Nezur_Executor\Nezur_Executor.exe"
+if %ERRORLEVEL% neq 0 (
+    echo Error: Failed to start Nezur Executor.
+    pause
+    goto MENU
+)
+
+:: Open Downloads folder
 echo /====================================================\
 echo           *** Opening Downloads folder... ***
 echo \====================================================/
 start "" "%USERPROFILE%\Downloads"
+pause
+goto MENU
+
 
 echo.
 echo /====================================================\
@@ -145,16 +181,60 @@ if exist "%nodejsPath%" (
 )
 goto :EOF
 
-:INSTALL_PLANETVPN
+:INSTALL_VPN
 cls
 echo /====================================================\
-echo     *** Downloading and Installing Planet VPN ***             
+echo          *** List of VPNs (Download) ***             
 echo \====================================================/
+echo               ____                ____
+echo              / //+\  Options Or  /+\\ \
+echo             /__\\_/   Functions  \_//__\
+echo             \__/_/  ____________  \_\__/
+echo              \/_/  /___///\\\___\  \_\/
+echo              //0\ //9\ \\\/// /8\\ /1\\
+echo              \\_/ \\_/ ///\\\ \_// \_//
+echo               -0    -  \\\///    0 _
+echo                -  0     \VV/  0        0
+echo                     _    \/ -        0
+echo            -             0-      -     -
+echo. 
+echo 1. PlanetVPN
+echo 2. Hide.me VPN (KEY: 50226389802992)
+echo 3. XVPN
+echo 4. Exit
 echo.
-"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://planetvpn-cdn.xyz/win/planetvpn.exe' -OutFile '%USERPROFILE%\Downloads\planetvpn.exe'"
-echo.
-echo *** Opening the downloaded file... ***
-start "" "%USERPROFILE%\Downloads\planetvpn.exe"
+
+set /p choice="Choose VPN to download (1-4): "
+
+if "%choice%" == "1" (
+    echo /====================================================\
+    echo                Downloading PlanetVPN...
+    echo \====================================================/
+    "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://planetvpn-cdn.xyz/win/planetvpn.exe' -OutFile '%USERPROFILE%\Downloads\planetvpn.exe'"
+    echo.
+    echo *** Opening the downloaded file... ***
+    start "" "%USERPROFILE%\Downloads\planetvpn.exe"
+) else if "%choice%" == "2" (
+    echo /====================================================\
+    echo                Downloading Hide.me VPN...
+    echo \====================================================/
+    start https://member.hide.me/
+) else if "%choice%" == "3" (
+    echo /====================================================\
+    echo                 Downloading XVPN...
+    echo \====================================================/
+    "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://xvpn.io/download/vpn-win?isAutoDownload=true&os=win' -OutFile '%USERPROFILE%\Downloads\xvpn.exe'"
+    echo.
+    echo *** Opening the downloaded file... ***
+    start "" "%USERPROFILE%\Downloads\xvpn.exe"
+) else if "%choice%" == "4" (
+    goto MENU
+) else (
+    echo Invalid, try again!
+    pause
+    goto INSTALL_VPN
+)
+
 pause
 goto MENU
 
@@ -251,7 +331,9 @@ echo \====================================================/
 echo.
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/bloxstrap/bloxstrap/releases/download/v2.6.7/Bloxstrap-Windows-x64.exe' -OutFile '%temp%\Bloxstrap-Windows-x64.exe'; Start-Process '%temp%\Bloxstrap-Windows-x64.exe' -Wait"
 echo.
-echo *** Bloxstrap installation completed! ***
+echo /====================================================\
+echo      *** Bloxstrap installation completed! ***
+echo \====================================================/
 pause
 goto MENU
 
