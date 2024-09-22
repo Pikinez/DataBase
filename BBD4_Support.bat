@@ -4,7 +4,7 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 echo /====================================================\
-echo               *** IRON-MARK-BATON 9 ***                 
+echo               *** IRON-MARK-BATON 9.1 ***                 
 echo        *** Samuraa1 Support (Made by BBD4) ***             
 echo \====================================================/
 echo     ______________________________________________
@@ -18,9 +18,9 @@ echo     \ ########:: ########:: ########:::::::: ##::/
 echo     /........:::........:::........:::::::::..:::\ 
 echo     \____________________________________________/
 echo.
-echo                _____              _____
-echo               //+//+\ Options Or /+\\+\\
-echo               \\_\\_/ Functions  \_//_//
+echo                _____              ________
+echo               //+//+\ Options Or /+\\+\\+\\
+echo               \\_\\_/ Functions  \_//_//_//
 echo.
 echo     1. Show list of Exploits' downloads
 echo     2. Show list of VPN's downloads
@@ -60,10 +60,10 @@ echo.
 echo.
 echo 1. Install Nezur
 echo 2. Install Solara
-echo 3. Install Celery
+echo 3. Install Celery (DISABLED)
 echo 4. Install FluxTeam
 echo 5. Install JJSploit
-echo 6. Install Zorara
+echo 6. Install Zorara (DISABLED)
 echo 7. Exit
 echo.
 set /p "choicen=Choose Function (1-7): "
@@ -155,11 +155,12 @@ echo 2. Download and Install/open Latest Bloxstrap Version
 echo 3. Download and change/fix Bloxstrap Config
 echo 4. Download and Install Node.js
 echo 5. Downgrade Roblox Version
-echo 6. Exit
+echo 6. Disable Windows Defender
+echo 7. Exit
 echo.
 
 set /p choicer="Choose Function (1-6): "
-for %%N in (1 2 3 4 5 6) do if "%choicer%"=="%%N" goto OPTION_%%N
+for %%N in (1 2 3 4 5 6 7) do if "%choicer%"=="%%N" goto OPTION_%%N
 goto MENU
 
 :OPTION_1
@@ -180,6 +181,21 @@ goto FIX_ROBLOX_VERSION_MISMATCH
 :OPTION_6
 goto MENU
 
+:OPTION_7
+goto MENU
+
+:DOWNLOAD_OFFDEFENDER
+cls
+echo /====================================================\
+echo    *** Downloading and Opening Disable Defender ***
+echo \====================================================/
+echo.
+bitsadmin /transfer "DownloadDisableDefender" https://github.com/pgkt04/defender-control/releases/download/v1.5/disable-defender.exe "%~dp0disable-defender.exe"
+start "" "%~dp0disable-defender.exe"
+pause
+goto MENU
+
+
 :JOIN_DISCORD
 cls
 echo /====================================================\
@@ -192,36 +208,15 @@ goto MENU
 :INSTALL_NEZUR
 cls
 echo /====================================================\
-echo    *** Downloading and Installing Nezur Executor ***
+echo       *** Opening Nezur Executor Website ***
 echo \====================================================/
 echo.
 
-"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://nezur.io/Nezur_Executor.zip' -OutFile '%temp%\Nezur_Executor.zip'"
-if %ERRORLEVEL% neq 0 (
-    echo Error: Failed to download Nezur Executor.
-    pause
-    goto MENU
-)
-
-echo Extracting Nezur Executor...
-"%powershellPath%" -Command "Expand-Archive -Path '%temp%\Nezur_Executor.zip' -DestinationPath '%temp%\Nezur_Executor' -Force"
-if %ERRORLEVEL% neq 0 (
-    echo Error: Failed to extract Nezur Executor.
-    pause
-    goto MENU
-)
-
-echo Starting Nezur Executor...
-start "" "%temp%\Nezur_Executor\Nezur_Executor.exe"
-if %ERRORLEVEL% neq 0 (
-    echo Error: Failed to start Nezur Executor.
-    pause
-    goto MENU
-)
-
-echo Nezur Executor installation completed!
+start https://nezur.io/Nezur_Executor.zip
+echo Nezur Executor website opened!
 pause
 goto MENU
+
 
 :FIX_ROBLOX_VERSION_MISMATCH
 cls
@@ -240,22 +235,46 @@ cls
 echo /====================================================\
 echo      *** Downloading and Installing Solara V3 ***             
 echo \====================================================/
-"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile '%temp%\Bootstrapper.exe'; Start-Process '%temp%\Bootstrapper.exe' -Wait"
-echo Opening Downloads folder...
-start "" "%USERPROFILE%\Downloads"
+
+REM Путь к папке на рабочем столе
+set "desktopFolder=%USERPROFILE%\Desktop\Solara"
+
+REM Создаем папку на рабочем столе
+if not exist "%desktopFolder%" mkdir "%desktopFolder%"
+
+REM Скачиваем файл в папку на рабочем столе
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile '%desktopFolder%\Bootstrapper.exe'"
+
+REM Проверяем, существует ли файл и запускаем его с правами администратора
+if exist "%desktopFolder%\Bootstrapper.exe" (
+    echo running Bootstrapper.exe...
+    powershell -Command "Start-Process '%desktopFolder%\Bootstrapper.exe' -Verb runAs"
+) else (
+    echo Error: File Bootstrapper.exe not found
+)
+
 pause
 goto MENU
+
 
 :INSTALL_ZORARA
 cls
 echo /====================================================\
 echo      *** Downloading and Installing Zorara ***             
 echo \====================================================/
-"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://zomeowrara.b-cdn.net/Zoraraversion2.7.zip' -OutFile '%temp%\Bootstrapper.exe'; Start-Process '%temp%\Bootstrapper.exe' -Wait"
-echo Opening Downloads folder...
-start "" "%USERPROFILE%\Downloads"
+
+REM Путь к папке на рабочем столе
+set "desktopFolder=%USERPROFILE%\Desktop\Zorara_Installer"
+
+REM Создаем папку на рабочем столе, если она не существует
+if not exist "%desktopFolder%" mkdir "%desktopFolder%"
+
+REM Скачиваем файл Zorara.zip в папку на рабочем столе
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/user-attachments/files/17063327/Zorara.zip' -OutFile '%desktopFolder%\Zorara.zip'"
+
 pause
 goto MENU
+
 
 :INSTALL_FLUXTEAM
 cls
@@ -449,5 +468,5 @@ echo \ ##:::: ##:::: ##:::: ##:::::::'####:/ /
 echo / ########::::: ##:::: ########: ####:\.\
 echo \........::::::..:::::........::....::/ /
 echo /_____________________________________\.\
-timeout /t 2 /nobreak > NUL
+timeout /t 1 /nobreak > NUL
 exit
