@@ -4,7 +4,7 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 echo /====================================================\
-echo               *** IRON-MARK-BATON 9.1 ***                 
+echo               *** IRON-MARK-BATON 9.1.2 ***                 
 echo        *** Samuraa1 Support (Made by BBD4) ***             
 echo \====================================================/
 echo     ______________________________________________
@@ -156,11 +156,12 @@ echo 3. Download and change/fix Bloxstrap Config
 echo 4. Download and Install Node.js
 echo 5. Downgrade Roblox Version
 echo 6. Disable Windows Defender
-echo 7. Exit
+echo 7. Create Solara Disk
+echo 8. Exit
 echo.
 
-set /p choicer="Choose Function (1-6): "
-for %%N in (1 2 3 4 5 6 7) do if "%choicer%"=="%%N" goto OPTION_%%N
+set /p choicer="Choose Function (1-8): "
+for %%N in (1 2 3 4 5 6 7 8) do if "%choicer%"=="%%N" goto OPTION_%%N
 goto MENU
 
 :OPTION_1
@@ -179,9 +180,73 @@ goto INSTALL_NODEJS
 goto FIX_ROBLOX_VERSION_MISMATCH
 
 :OPTION_6
-goto MENU
+goto DOWNLOAD_OFFDEFENDER
 
 :OPTION_7
+goto CHANGE_DERICTORY
+
+:OPTION_8
+goto MENU
+
+
+:CHANGE_DIRECTORY
+cls
+echo /====================================================\
+echo               Virtual Disk With Solara
+echo \====================================================/
+echo 1. Create DSolara
+echo 2. Delete DSolara
+echo 3. Return(HOME)
+echo /\===================================================/\
+set /p choice=Выберите опцию (1-3): 
+
+if "%choice%"=="1" goto DOWNLOADSOLARA_DIRECTORY
+if "%choice%"=="2" goto DELETESOLARA_DIRECTORY
+if "%choice%"=="3" goto MENU
+pause
+goto MENU
+
+:DOWNLOADSOLARA_DIRECTORY
+echo Создаем виртуальный диск Solara...
+subst Z: C:\Solara
+
+echo /====================================================\
+echo                Created as Z: C:\Solara!
+echo \====================================================/
+
+:: Проверяем наличие PowerShell и задаем путь
+set "powershellPath=%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe"
+
+echo /====================================================\
+echo                Downloading SolaraV3...
+echo \====================================================/
+
+:: Загрузка файла на виртуальный диск Z:
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile 'Z:\Bootstrapper.exe'"
+
+if %errorlevel% neq 0 (
+    echo ERROR: Ошибка при загрузке файла.
+) else (
+    echo Successfully downloaded to Z:\Bootstrapper.exe.
+)
+
+pause
+goto MENU
+
+:DELETESOLARA_DIRECTORY
+echo /====================================================\
+echo                Deleting Solara Disk...
+echo \====================================================/
+
+subst Z: /d
+
+if %errorlevel% neq 0 (
+    echo ERROR: Не удалось удалить виртуальный диск Z:.
+) else (
+    echo Виртуальный диск Z: успешно удален.
+)
+
+pause
 goto MENU
 
 :DOWNLOAD_OFFDEFENDER
