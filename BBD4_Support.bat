@@ -183,7 +183,7 @@ goto FIX_ROBLOX_VERSION_MISMATCH
 goto DOWNLOAD_OFFDEFENDER
 
 :OPTION_7
-goto CHANGE_DERICTORY
+goto CHANGE_DIRECTORY
 
 :OPTION_8
 goto MENU
@@ -194,11 +194,11 @@ cls
 echo /====================================================\
 echo               Virtual Disk With Solara
 echo \====================================================/
+echo.
 echo 1. Create DSolara
 echo 2. Delete DSolara
 echo 3. Return(HOME)
-echo /\===================================================/\
-set /p choice=Выберите опцию (1-3): 
+set /p choice=Select Option(1-3): 
 
 if "%choice%"=="1" goto DOWNLOADSOLARA_DIRECTORY
 if "%choice%"=="2" goto DELETESOLARA_DIRECTORY
@@ -207,16 +207,14 @@ pause
 goto MENU
 
 :DOWNLOADSOLARA_DIRECTORY
-echo Создаем виртуальный диск Solara...
+echo Creating Solara...
 subst Z: C:\Solara
 
 echo /====================================================\
 echo                Created as Z: C:\Solara!
 echo \====================================================/
-
-:: Проверяем наличие PowerShell и задаем путь
-set "powershellPath=%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe"
-
+echo.
+echo.
 echo /====================================================\
 echo                Downloading SolaraV3...
 echo \====================================================/
@@ -225,7 +223,7 @@ echo \====================================================/
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile 'Z:\Bootstrapper.exe'"
 
 if %errorlevel% neq 0 (
-    echo ERROR: Ошибка при загрузке файла.
+    echo ERROR
 ) else (
     echo Successfully downloaded to Z:\Bootstrapper.exe.
 )
@@ -241,9 +239,9 @@ echo \====================================================/
 subst Z: /d
 
 if %errorlevel% neq 0 (
-    echo ERROR: Не удалось удалить виртуальный диск Z:.
+    echo ERROR: Cant delete Z:.
 ) else (
-    echo Виртуальный диск Z: успешно удален.
+    echo was Z: deleted.
 )
 
 pause
