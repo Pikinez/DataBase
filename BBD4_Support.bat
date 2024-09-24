@@ -4,7 +4,7 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 echo /====================================================\
-echo               *** IRON-MARK-BATON 9.1.2 ***                 
+echo               *** IRON-MARK-BATON 9.1.5 ***                 
 echo        *** Samuraa1 Support (Made by BBD4) ***             
 echo \====================================================/
 echo     ______________________________________________
@@ -58,12 +58,12 @@ echo                     _    \/ -        0
 echo            -             0-      -     -
 echo. 
 echo.
-echo 1. Install Nezur
-echo 2. Install Solara
-echo 3. Install Celery (DISABLED)
-echo 4. Install FluxTeam
-echo 5. Install JJSploit
-echo 6. Install Zorara (DISABLED)
+echo 1. Install Nezur (NOSTATUS)
+echo 2. Install Solara (NOSTATUS)
+echo 3. Install Celery (NOSTATUS)
+echo 4. Install FluxTeam (NOSTATUS) 
+echo 5. Install JJSploit (NOSTATUS)
+echo 6. Install Zorara (NOSTATUS)
 echo 7. Exit
 echo.
 set /p "choicen=Choose Function (1-7): "
@@ -82,7 +82,7 @@ echo /====================================================\
 echo          *** List of VPNs (Download) ***             
 echo \====================================================/
 echo.
-echo               ____                ____
+echo               ____                ____              
 echo              / //+\  Options Or  /+\\ \
 echo             /__\\_/   Functions  \_//__\
 echo             \__/_/  ____________  \_\__/
@@ -108,7 +108,7 @@ if "%vpnChoice%"=="1" (
     set "vpnName=PlanetVPN"
     set "vpnUrl=https://planetvpn-cdn.xyz/win/planetvpn.exe"
 ) else if "%vpnChoice%"=="2" (
-    start https://member.hide.me/
+    start "" "https://member.hide.me/"
     goto MENU
 ) else if "%vpnChoice%"=="3" (
     set "vpnName=XVPN"
@@ -116,7 +116,7 @@ if "%vpnChoice%"=="1" (
 ) else if "%vpnChoice%"=="4" (
     goto MENU
 ) else (
-    echo Invalid, try again!
+    echo Invalid choice, please try again!
     pause
     goto LIST_VPN
 )
@@ -124,11 +124,18 @@ if "%vpnChoice%"=="1" (
 if defined vpnName (
     echo Downloading %vpnName%...
     "%powershellPath%" -Command "Invoke-WebRequest -Uri '%vpnUrl%' -OutFile '%USERPROFILE%\Downloads\%vpnName%.exe'"
-    start "" "%USERPROFILE%\Downloads\%vpnName%.exe"
+    
+    if %errorlevel% neq 0 (
+        echo ERROR: Failed to download %vpnName%.
+    ) else (
+        start "" "%USERPROFILE%\Downloads\%vpnName%.exe"
+        echo %vpnName% downloaded successfully and is now starting!
+    )
 )
 
 pause
 goto MENU
+
 
 :LIST_FIXES
 cls
@@ -162,7 +169,10 @@ echo.
 
 set /p choicer="Choose Function (1-8): "
 for %%N in (1 2 3 4 5 6 7 8) do if "%choicer%"=="%%N" goto OPTION_%%N
-goto MENU
+
+echo Invalid choice! Please select a number between 1 and 8.
+pause
+goto LIST_FIXES
 
 :OPTION_1
 goto DELETE_ROBLOX
@@ -186,7 +196,7 @@ goto DOWNLOAD_OFFDEFENDER
 goto CHANGE_DIRECTORY
 
 :OPTION_8
-goto MENU
+exit
 
 
 :CHANGE_DIRECTORY
@@ -197,14 +207,18 @@ echo \====================================================/
 echo.
 echo 1. Create DSolara
 echo 2. Delete DSolara
-echo 3. Return(HOME)
-set /p choice=Select Option(1-3): 
+echo 3. Return (HOME)
+echo.
+
+set /p choice="Select Option (1-3): " 
 
 if "%choice%"=="1" goto DOWNLOADSOLARA_DIRECTORY
 if "%choice%"=="2" goto DELETESOLARA_DIRECTORY
 if "%choice%"=="3" goto MENU
+
+echo Invalid choice! Please select a valid option (1-3).
 pause
-goto MENU
+goto CHANGE_DIRECTORY
 
 :DOWNLOADSOLARA_DIRECTORY
 echo Creating Solara...
@@ -214,16 +228,15 @@ echo /====================================================\
 echo                Created as Z: C:\Solara!
 echo \====================================================/
 echo.
-echo.
 echo /====================================================\
 echo                Downloading SolaraV3...
 echo \====================================================/
 
-:: Загрузка файла на виртуальный диск Z:
+:: Downloading the file to the virtual disk Z:
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile 'Z:\Bootstrapper.exe'"
 
 if %errorlevel% neq 0 (
-    echo ERROR
+    echo ERROR: Failed to download Bootstrapper.exe to Z:.
 ) else (
     echo Successfully downloaded to Z:\Bootstrapper.exe.
 )
@@ -239,9 +252,9 @@ echo \====================================================/
 subst Z: /d
 
 if %errorlevel% neq 0 (
-    echo ERROR: Cant delete Z:.
+    echo ERROR: Unable to delete Z:.
 ) else (
-    echo was Z: deleted.
+    echo Successfully deleted Z:.
 )
 
 pause
@@ -254,7 +267,12 @@ echo    *** Downloading and Opening Disable Defender ***
 echo \====================================================/
 echo.
 bitsadmin /transfer "DownloadDisableDefender" https://github.com/pgkt04/defender-control/releases/download/v1.5/disable-defender.exe "%~dp0disable-defender.exe"
-start "" "%~dp0disable-defender.exe"
+if %errorlevel% neq 0 (
+    echo ERROR: Failed to download Disable Defender.
+) else (
+    start "" "%~dp0disable-defender.exe"
+    echo Successfully started Disable Defender.
+)
 pause
 goto MENU
 
@@ -264,9 +282,11 @@ cls
 echo /====================================================\
 echo       *** Joining Discord server Samuraa1 ***      
 echo \====================================================/
-start "https://discord.gg/SzHGMzjKMb"
+start "" "https://discord.gg/SzHGMzjKMb"
+echo Discord server link opened!
 pause
 goto MENU
+
 
 :INSTALL_NEZUR
 cls
@@ -274,8 +294,7 @@ echo /====================================================\
 echo       *** Opening Nezur Executor Website ***
 echo \====================================================/
 echo.
-
-start https://nezur.io/Nezur_Executor.zip
+start "" "https://nezur.io/Nezur_Executor.zip"
 echo Nezur Executor website opened!
 pause
 goto MENU
@@ -289,9 +308,15 @@ echo \====================================================/
 echo.
 echo Downloading and Running Roblox Downgrader...
 "%powershellPath%" -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ActualMasterOogway/Roblox-Downgrader/main/RobloxDowngrader.exe' -OutFile '%temp%\RobloxDowngrader.exe'; Start-Process '%temp%\RobloxDowngrader.exe' -Wait"
-echo Successfully fixed Roblox version mismatch!
+
+if %errorlevel% neq 0 (
+    echo ERROR: Failed to run Roblox Downgrader.
+) else (
+    echo Successfully fixed Roblox version mismatch!
+)
 pause
 goto MENU
+
 
 :INSTALL_SOLARA
 cls
