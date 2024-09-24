@@ -4,7 +4,7 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 echo /====================================================\
-echo               *** IRON-MARK-BATON 9.1.5 ***                 
+echo               *** IRON-MARK-BATON 9.1.6 ***                 
 echo        *** Samuraa1 Support (Made by BBD4) ***             
 echo \====================================================/
 echo     ______________________________________________
@@ -222,7 +222,23 @@ goto CHANGE_DIRECTORY
 
 :DOWNLOADSOLARA_DIRECTORY
 echo Creating Solara...
+
+:: Проверяем, существует ли папка, если нет — создаем её
+if not exist "C:\Solara" (
+    mkdir C:\Solara
+    echo Folder C:\Solara created.
+) else (
+    echo Folder C:\Solara already exists.
+)
+
+:: Создаем виртуальный диск Z:
 subst Z: C:\Solara
+
+if errorlevel 1 (
+    echo ERROR: Unable to create virtual disk Z:.
+    pause
+    goto MENU
+)
 
 echo /====================================================\
 echo                Created as Z: C:\Solara!
@@ -232,7 +248,7 @@ echo /====================================================\
 echo                Downloading SolaraV3...
 echo \====================================================/
 
-:: Downloading the file to the virtual disk Z:
+:: Загрузка файла на виртуальный диск Z:
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile 'Z:\Bootstrapper.exe'"
 
 if %errorlevel% neq 0 (
@@ -259,6 +275,7 @@ if %errorlevel% neq 0 (
 
 pause
 goto MENU
+
 
 :DOWNLOAD_OFFDEFENDER
 cls
@@ -327,18 +344,19 @@ echo \====================================================/
 REM Путь к папке на рабочем столе
 set "desktopFolder=%USERPROFILE%\Desktop\Solara"
 
-REM Создаем папку на рабочем столе
+REM Создаем папку на рабочем столе, если она не существует
 if not exist "%desktopFolder%" mkdir "%desktopFolder%"
 
-REM Скачиваем файл в папку на рабочем столе
-"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile '%desktopFolder%\Bootstrapper.exe'"
+REM Скачивание файла с использованием bitsadmin
+bitsadmin /transfer "DownloadSolara" https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe "%desktopFolder%\Bootstrapper.exe"
 
-REM Проверяем, существует ли файл и запускаем его с правами администратора
+REM Проверка успешного скачивания и запуск с правами администратора
 if exist "%desktopFolder%\Bootstrapper.exe" (
-    echo running Bootstrapper.exe...
+    echo Successfully downloaded Bootstrapper.exe.
+    echo Running Bootstrapper.exe with administrator privileges...
     powershell -Command "Start-Process '%desktopFolder%\Bootstrapper.exe' -Verb runAs"
 ) else (
-    echo Error: File Bootstrapper.exe not found
+    echo Error: Bootstrapper.exe not found or download failed.
 )
 
 pause

