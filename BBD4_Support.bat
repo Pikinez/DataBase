@@ -283,12 +283,17 @@ echo /====================================================\
 echo    *** Downloading and Opening Disable Defender ***
 echo \====================================================/
 echo.
+echo.
 bitsadmin /transfer "DownloadDisableDefender" https://github.com/pgkt04/defender-control/releases/download/v1.5/disable-defender.exe "%~dp0disable-defender.exe"
 if %errorlevel% neq 0 (
-    echo ERROR: Failed to download Disable Defender.
+    echo /====================================================\
+    echo         Failed to download Disable Defender.
+    echo \====================================================/
 ) else (
     start "" "%~dp0disable-defender.exe"
-    echo Successfully started Disable Defender.
+    echo /====================================================\
+    echo        Successfully started Disable Defender.
+    echo \====================================================/
 )
 pause
 goto MENU
@@ -320,7 +325,7 @@ goto MENU
 :FIX_ROBLOX_VERSION_MISMATCH
 cls
 echo /====================================================\
-echo        *** FIXING ROBLOX VERSION MISMATCH ***             
+echo        *** Fixing roblox version mismatch ***             
 echo \====================================================/
 echo.
 echo Downloading and Running Roblox Downgrader...
@@ -340,23 +345,28 @@ cls
 echo /====================================================\
 echo      *** Downloading and Installing Solara V3 ***             
 echo \====================================================/
+echo.
+echo.
 
 REM Путь к папке на рабочем столе
 set "desktopFolder=%USERPROFILE%\Desktop\Solara"
 
-REM Создаем папку на рабочем столе, если она не существует
+REM Создаем папку на рабочем столе
 if not exist "%desktopFolder%" mkdir "%desktopFolder%"
 
-REM Скачивание файла с использованием bitsadmin
-bitsadmin /transfer "DownloadSolara" https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe "%desktopFolder%\Bootstrapper.exe"
+я хочу чтобы оно использовало bitsadmin /transfer "DownloadDisableDefender"
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile '%desktopFolder%\Bootstrapper.exe'"
 
-REM Проверка успешного скачивания и запуск с правами администратора
+REM Проверяем, существует ли файл и запускаем его с правами администратора
 if exist "%desktopFolder%\Bootstrapper.exe" (
-    echo Successfully downloaded Bootstrapper.exe.
-    echo Running Bootstrapper.exe with administrator privileges...
+    echo /====================================================\
+    echo              *** running Solara V3 ***             
+    echo \====================================================/
     powershell -Command "Start-Process '%desktopFolder%\Bootstrapper.exe' -Verb runAs"
 ) else (
-    echo Error: Bootstrapper.exe not found or download failed.
+    echo /====================================================\
+    echo          File Bootstrapper.exe not found
+    echo \====================================================/
 )
 
 pause
@@ -368,6 +378,9 @@ cls
 echo /====================================================\
 echo      *** Downloading and Installing Zorara ***             
 echo \====================================================/
+echo.
+echo.
+
 
 REM Путь к папке на рабочем столе
 set "desktopFolder=%USERPROFILE%\Desktop\Zorara_Installer"
@@ -377,6 +390,10 @@ if not exist "%desktopFolder%" mkdir "%desktopFolder%"
 
 REM Скачиваем файл Zorara.zip в папку на рабочем столе
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/user-attachments/files/17063327/Zorara.zip' -OutFile '%desktopFolder%\Zorara.zip'"
+
+echo /====================================================\
+echo         *** Task with Zorara finished! ***             
+echo \====================================================/
 
 pause
 goto MENU
@@ -404,6 +421,34 @@ start "" "%USERPROFILE%\Downloads"
 pause
 goto MENU
 
+
+:NODE_JS_ASK
+echo                                                                            .______.
+echo               ,___,- - - - - - - - - - - ,___,                             /.____.\
+echo               \._.\                      \._.\                        .___/./ == \.\___.
+echo               .\/\.\                     ./\\.\                       /.____\ ++ /____.\
+echo               ///\\.\                    //\\\.\                      \.\____....____/./
+echo              ////\\\.\                  ///\\\\.\                     .\---\.\.././---/.
+echo             /////\\\\.\                ////\\\\\.\                         /./..\.\
+echo            //////\\\\\.\              /////\\\\\\.\                       .\_\__/_/.
+echo           /___________\.\            /___________\.\              .__________________.
+echo          /- - - - - - -\/           /- - - - - - -\--\._____     ./-------------- + -\.
+echo          \_____________/   NODEJS   \_____________/------\ \     .\BUNBASTER4BLASTER /.
+echo           \___________/              \___________/        \ \     .\ _ _ _ _R_I_P_ _/.
+echo            \_//+//+//+\ ConfirmatioN /+\\+\\+\\_/          \ \_____/.\--=========\
+echo              \\_\\_\\_/     MenU     \_//_//_//             \________/------------\
+echo.
+echo.
+echo 1. Install NodeJS
+echo 2. Uninstall NodeJS
+echo 3. Back(Menu)
+set /p choice=Select (1-3): 
+
+if "%choice%"=="1" goto INSTALL_NODEJS
+if "%choice%"=="2" goto UNINSTALL_NODEJS
+if "%choice%"=="3" goto MENU
+
+
 :INSTALL_NODEJS
 cls
 echo /====================================================\
@@ -413,11 +458,17 @@ echo.
 
 set "nodejsPath=C:\Program Files\nodejs"
 if exist "%nodejsPath%" (
-    echo Uninstalling existing Node.js...
+    echo /====================================================\
+    echo          Uninstalling existing Node.js...
+    echo \====================================================/
     call :UNINSTALL_NODEJS
-    echo Node.js uninstalled successfully!
+    echo /====================================================\
+    echo         Node.js uninstalled successfully!
+    echo \====================================================/
 ) else (
-    echo No existing Node.js installation found.
+    echo /====================================================\
+    echo       No existing Node.js installation found.
+    echo \====================================================/
 )
 
 echo Downloading and Installing Node.js...
