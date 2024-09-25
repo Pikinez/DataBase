@@ -4,7 +4,7 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 echo /====================================================\
-echo               *** IRON-MARK-BATON 9.1.6 ***                 
+echo               *** IRON-MARK-BATON 9.1.6.5 ***                 
 echo        *** Samuraa1 Support (Made by BBD4) ***             
 echo \====================================================/
 echo     ______________________________________________
@@ -347,17 +347,9 @@ echo      *** Downloading and Installing Solara V3 ***
 echo \====================================================/
 echo.
 echo.
-
-REM Путь к папке на рабочем столе
 set "desktopFolder=%USERPROFILE%\Desktop\Solara"
-
-REM Создаем папку на рабочем столе
 if not exist "%desktopFolder%" mkdir "%desktopFolder%"
-
-я хочу чтобы оно использовало bitsadmin /transfer "DownloadDisableDefender"
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile '%desktopFolder%\Bootstrapper.exe'"
-
-REM Проверяем, существует ли файл и запускаем его с правами администратора
 if exist "%desktopFolder%\Bootstrapper.exe" (
     echo /====================================================\
     echo              *** running Solara V3 ***             
@@ -368,7 +360,6 @@ if exist "%desktopFolder%\Bootstrapper.exe" (
     echo          File Bootstrapper.exe not found
     echo \====================================================/
 )
-
 pause
 goto MENU
 
@@ -380,15 +371,8 @@ echo      *** Downloading and Installing Zorara ***
 echo \====================================================/
 echo.
 echo.
-
-
-REM Путь к папке на рабочем столе
 set "desktopFolder=%USERPROFILE%\Desktop\Zorara_Installer"
-
-REM Создаем папку на рабочем столе, если она не существует
 if not exist "%desktopFolder%" mkdir "%desktopFolder%"
-
-REM Скачиваем файл Zorara.zip в папку на рабочем столе
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/user-attachments/files/17063327/Zorara.zip' -OutFile '%desktopFolder%\Zorara.zip'"
 
 echo /====================================================\
@@ -404,8 +388,12 @@ cls
 echo /====================================================\
 echo      *** Downloading and Installing FluxTeam ***             
 echo \====================================================/
+echo.
+echo.
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/getfluxteam/FluxTeamDownload/raw/main/FluxTeamB.zip' -OutFile '%temp%\Bootstrapper.exe'; Start-Process '%temp%\Bootstrapper.exe' -Wait"
-echo Opening Downloads folder...
+echo /====================================================\
+echo             Opening Downloads folder...
+echo \====================================================/
 start "" "%USERPROFILE%\Downloads"
 pause
 goto MENU
@@ -415,8 +403,12 @@ cls
 echo /====================================================\
 echo      *** Downloading and Installing JJSploit ***             
 echo \====================================================/
+echo.
+echo.
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/wcrddn/wcrddn.github.io/raw/refs/heads/main/9-20/JJSploit_8.6.0_x64-setup.exe' -OutFile '%temp%\Bootstrapper.exe'; Start-Process '%temp%\Bootstrapper.exe' -Wait"
-echo Opening Downloads folder...
+echo /====================================================\
+echo             Opening Downloads folder...
+echo \====================================================/
 start "" "%USERPROFILE%\Downloads"
 pause
 goto MENU
