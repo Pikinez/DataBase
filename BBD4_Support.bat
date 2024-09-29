@@ -3,11 +3,12 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 
 :MENU
 cls
+echo ______________________________________________________
 echo /====================================================\
-echo               *** IRON-MARK-BATON 9.1.6.5 ***                 
-echo        *** Samuraa1 Support (Made by BBD4) ***             
+echo \           *** IRON-MARK-BATON 9.2 ***              /        
+echo /              ***(Made by BBD4) ***                 \
 echo \====================================================/
-echo     ______________________________________________
+echo   \.______________________________________________./
 echo     \'########::'########::'########::'##::::::::/
 echo     / ##.... ##: ##.... ##: ##.... ##: ##:::'##::\
 echo     \ ##:::: ##: ##:::: ##: ##:::: ##: ##::: ##::/
@@ -17,15 +18,16 @@ echo     / ##:::: ##: ##:::: ##: ##:::: ##:...... ##::\
 echo     \ ########:: ########:: ########:::::::: ##::/
 echo     /........:::........:::........:::::::::..:::\ 
 echo     \____________________________________________/
-echo.
-echo                _____              ________
-echo               //+//+\ Options Or /+\\+\\+\\
-echo               \\_\\_/ Functions  \_//_//_//
+echo      \__________________________________________/
+echo       \._____________...........______________./
+echo        \_\_\_\_\_\_/ \WARHAMMER/  \_\_\_\_\_\_/
+echo        //+//+//+//+\  OPTIONS OR /+\\+\\+\\+\\
+echo        \\_\\_\\_\\_/  FUNCTIONS  \_//_//_//_//
 echo.
 echo     1. Show list of Exploits' downloads
 echo     2. Show list of VPN's downloads
 echo     3. Show list of fixes
-echo     4. Join Discord server Samuraa1 Community \\If you want :D\\
+echo     4. Goto dark community server \\If you want :D\\
 echo     5. Exit
 echo.
 set /p choice=Select (1-5): 
@@ -58,9 +60,9 @@ echo                     _    \/ -        0
 echo            -             0-      -     -
 echo. 
 echo.
-echo 1. Install Nezur (NOSTATUS)
-echo 2. Install Solara (NOSTATUS)
-echo 3. Install Celery (NOSTATUS)
+echo 1. Install Nezur (ENABLED)
+echo 2. Install Solara (ENABLED)
+echo 3. Install Celery (DISABLED)
 echo 4. Install FluxTeam (NOSTATUS) 
 echo 5. Install JJSploit (NOSTATUS)
 echo 6. Install Zorara (NOSTATUS)
@@ -116,20 +118,28 @@ if "%vpnChoice%"=="1" (
 ) else if "%vpnChoice%"=="4" (
     goto MENU
 ) else (
-    echo Invalid choice, please try again!
+    echo /====================================================\
+    echo           Invalid choice, please try again!
+    echo \====================================================/
     pause
     goto LIST_VPN
 )
 
 if defined vpnName (
-    echo Downloading %vpnName%...
+    echo /====================================================\
+    echo                Downloading %vpnName%...
+    echo \====================================================/
     "%powershellPath%" -Command "Invoke-WebRequest -Uri '%vpnUrl%' -OutFile '%USERPROFILE%\Downloads\%vpnName%.exe'"
     
     if %errorlevel% neq 0 (
+        echo /====================================================\
         echo ERROR: Failed to download %vpnName%.
+        echo \====================================================/
     ) else (
         start "" "%USERPROFILE%\Downloads\%vpnName%.exe"
+        echo /====================================================\
         echo %vpnName% downloaded successfully and is now starting!
+        echo \====================================================/
     )
 )
 
@@ -169,8 +179,9 @@ echo.
 
 set /p choicer="Choose Function (1-8): "
 for %%N in (1 2 3 4 5 6 7 8) do if "%choicer%"=="%%N" goto OPTION_%%N
-
+echo /====================================================\
 echo Invalid choice! Please select a number between 1 and 8.
+echo \====================================================/
 pause
 goto LIST_FIXES
 
@@ -216,26 +227,36 @@ if "%choice%"=="1" goto DOWNLOADSOLARA_DIRECTORY
 if "%choice%"=="2" goto DELETESOLARA_DIRECTORY
 if "%choice%"=="3" goto MENU
 
-echo Invalid choice! Please select a valid option (1-3).
+echo /====================================================\
+echo  Invalid choice! Please select a valid option (1-3).
+echo \====================================================/
 pause
 goto CHANGE_DIRECTORY
 
 :DOWNLOADSOLARA_DIRECTORY
-echo Creating Solara...
+echo /====================================================\
+echo                 Creating Solara...
+echo \====================================================/
 
 :: Проверяем, существует ли папка, если нет — создаем её
 if not exist "C:\Solara" (
     mkdir C:\Solara
-    echo Folder C:\Solara created.
+    echo /====================================================\
+    echo              Folder C:\Solara created.
+    echo \====================================================/
 ) else (
-    echo Folder C:\Solara already exists.
+    echo /====================================================\
+    echo           Folder C:\Solara already exists.
+    echo \====================================================/
 )
 
 :: Создаем виртуальный диск Z:
 subst Z: C:\Solara
 
 if errorlevel 1 (
-    echo ERROR: Unable to create virtual disk Z:.
+    echo /====================================================\
+    echo        ERROR: Unable to create virtual disk Z:.
+    echo \====================================================/
     pause
     goto MENU
 )
@@ -252,9 +273,13 @@ echo \====================================================/
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile 'Z:\Bootstrapper.exe'"
 
 if %errorlevel% neq 0 (
-    echo ERROR: Failed to download Bootstrapper.exe to Z:.
+    echo /====================================================\
+    echo    ERROR: Failed to download Bootstrapper.exe to Z:.
+    echo \====================================================/
 ) else (
-    echo Successfully downloaded to Z:\Bootstrapper.exe.
+    echo /====================================================\
+    echo    Successfully downloaded to Z:\Bootstrapper.exe.
+    echo \====================================================/
 )
 
 pause
@@ -268,9 +293,13 @@ echo \====================================================/
 subst Z: /d
 
 if %errorlevel% neq 0 (
-    echo ERROR: Unable to delete Z:.
+    echo /====================================================\
+    echo               ERROR: Unable to delete Z:.
+    echo \====================================================/
 ) else (
-    echo Successfully deleted Z:.
+    echo /====================================================\
+    echo                Successfully deleted Z:.
+    echo \====================================================/
 )
 
 pause
@@ -302,10 +331,14 @@ goto MENU
 :JOIN_DISCORD
 cls
 echo /====================================================\
-echo       *** Joining Discord server Samuraa1 ***      
+echo       *** Joining Discord server BBD5 ***      
 echo \====================================================/
-start "" "https://discord.gg/SzHGMzjKMb"
-echo Discord server link opened!
+echo.
+start "" "https://discord.gg/sr79MHzp9K"
+echo.
+echo /====================================================\
+echo            Discord server link opened!
+echo \====================================================/
 pause
 goto MENU
 
@@ -317,7 +350,10 @@ echo       *** Opening Nezur Executor Website ***
 echo \====================================================/
 echo.
 start "" "https://nezur.io/Nezur_Executor.zip"
-echo Nezur Executor website opened!
+echo.
+echo /====================================================\
+echo            Nezur Executor website opened!
+echo \====================================================/
 pause
 goto MENU
 
@@ -328,13 +364,19 @@ echo /====================================================\
 echo        *** Fixing roblox version mismatch ***             
 echo \====================================================/
 echo.
-echo Downloading and Running Roblox Downgrader...
+echo /====================================================\
+echo   *** Downloading and Running Roblox Downgrader ***
+echo \====================================================/
 "%powershellPath%" -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ActualMasterOogway/Roblox-Downgrader/main/RobloxDowngrader.exe' -OutFile '%temp%\RobloxDowngrader.exe'; Start-Process '%temp%\RobloxDowngrader.exe' -Wait"
 
 if %errorlevel% neq 0 (
-    echo ERROR: Failed to run Roblox Downgrader.
+    echo /====================================================\
+    echo    *** ERROR: Failed to run Roblox Downgrader. ***
+    echo \====================================================/
 ) else (
-    echo Successfully fixed Roblox version mismatch!
+    echo /====================================================\
+    echo  *** Successfully fixed Roblox version mismatch! ***
+    echo \====================================================/
 )
 pause
 goto MENU
@@ -465,7 +507,9 @@ if exist "%nodejsPath%" (
 
 echo Downloading and Installing Node.js...
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v20.16.0/node-v20.16.0-x64.msi' -OutFile '%temp%\nodejs.msi'; Start-Process '%temp%\nodejs.msi' -Wait"
-echo Node.js installation completed!
+echo /====================================================\
+echo           Node.js installation completed!
+echo \====================================================/
 pause
 goto MENU
 
@@ -475,13 +519,21 @@ taskkill /f /im npm.exe > NUL 2>&1
 taskkill /f /im npx.exe > NUL 2>&1
 
 if exist "%nodejsPath%\unins000.exe" (
-    echo Uninstalling Node.js...
+    echo /====================================================\
+    echo              Uninstalling Node.js...
+    echo \====================================================/
+    echo.
+    echo.
     "%nodejsPath%\unins000.exe" /SILENT /NORESTART
     timeout /t 5 > NUL
 )
 
 if exist "%nodejsPath%" (
-    echo Deleting Node.js installation folder...
+    echo /====================================================\
+    echo       Deleting Node.js installation folder...
+    echo \====================================================/
+    echo.
+    echo.
     rmdir /s /q "%nodejsPath%"
 )
 goto :EOF
@@ -492,7 +544,9 @@ echo /====================================================\
 echo    *** Downloading and Installing Better Celery ***             
 echo \====================================================/
 "%powershellPath%" -NoProfile -Command "irm 'https://bcelery.github.io/a' | iex"
-echo Better Celery installation completed!
+echo /====================================================\
+echo     *** Better Celery installation completed! ***
+echo \====================================================/
 pause
 goto MENU
 
