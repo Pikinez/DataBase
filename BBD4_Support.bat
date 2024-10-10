@@ -1,34 +1,35 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-
+title DARK_BATON-BBD5-V0.9.3
 :MENU
 cls
-echo ______________________________________________________
-echo /====================================================\
-echo \           *** IRON-MARK-BATON 9.2 ***              /        
-echo /              ***(Made by BBD4) ***                 \
-echo \====================================================/
-echo   \.______________________________________________./
-echo     \'########::'########::'########::'##::::::::/
-echo     / ##.... ##: ##.... ##: ##.... ##: ##:::'##::\
-echo     \ ##:::: ##: ##:::: ##: ##:::: ##: ##::: ##::/
-echo     / ########:: ########:: ##:::: ##: ##::: ##::\
-echo     \ ##.... ##: ##.... ##: ##:::: ##: #########:/ 
-echo     / ##:::: ##: ##:::: ##: ##:::: ##:...... ##::\
-echo     \ ########:: ########:: ########:::::::: ##::/
-echo     /........:::........:::........:::::::::..:::\ 
-echo     \____________________________________________/
-echo      \__________________________________________/
-echo       \._____________...........______________./
-echo        \_\_\_\_\_\_/ \WARHAMMER/  \_\_\_\_\_\_/
-echo        //+//+//+//+\  OPTIONS OR /+\\+\\+\\+\\
-echo        \\_\\_\\_\\_/  FUNCTIONS  \_//_//_//_//
+echo        .____________________________________________________.roblox
+echo       ./====================================================\.javascript
+echo       .\DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###/.chrome   
+echo       ./DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###\.disc                     
+echo       .\\==================================================//.price
+echo        -=\.______________________________________________./=-.pvp
+echo           \\\########::'########::'########::'########:///.py
+echo            \\##.... ##: ##.... ##: ##.... ##: ##.....:://.lua
+echo             \##:::: ##: ##:::: ##: ##:::: ##: ##:::::::/.ruby
+echo             /########:: ########:: ##:::: ##: #######::\.go
+echo            //##.... ##: ##.... ##: ##:::: ##:...... ##:\\.exe
+echo            \/##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:\/.win
+echo            \/########:: ########:: ########::. ######::\/.shell
+echo     .______//........:::........:::........::::......::\\______.fade
+echo     .\-____\____________________________________________/____-/.vpn
+echo      .\-___ \__________________________________________/ ___-/.zip
+echo       .\-__/-\._____________...........______________./-\__-/.rar
+echo               \_\_\_\_\_\_/ \ BrRrRrO /  \_\_\_\_\_\_/
+echo               //+//+//+//+\ .DARK_BATON. /+\\+\\+\\+\\
+echo               \\_\\_\\_\\_/              \_//_//_//_//
 echo.
-echo     1. Show list of Exploits' downloads
-echo     2. Show list of VPN's downloads
-echo     3. Show list of fixes
-echo     4. Goto dark community server \\If you want :D\\
-echo     5. Exit
+echo                 1. Show list of Exploits' downloads
+echo                   2. Show list of VPN's downloads
+echo                       3. Show list of fixes
+echo                       4. Join Discord server
+echo.
+echo                              5. Exit
 echo.
 set /p choice=Select (1-5): 
 
@@ -43,7 +44,7 @@ goto MENU
 :LIST_EXPLOITS
 cls
 echo /====================================================\
-echo               *** List of Exploits ***             
+echo              \\\..List of Exploits...///              
 echo \====================================================/
 echo.
 echo.
@@ -60,13 +61,13 @@ echo                     _    \/ -        0
 echo            -             0-      -     -
 echo. 
 echo.
-echo 1. Install Nezur (ENABLED)
-echo 2. Install Solara (ENABLED)
-echo 3. Install Celery (DISABLED)
-echo 4. Install FluxTeam (NOSTATUS) 
-echo 5. Install JJSploit (NOSTATUS)
-echo 6. Install Zorara (NOSTATUS)
-echo 7. Exit
+echo 1. Install Nezur
+echo 2. Install Solara
+echo 3. Install Celery
+echo 4. Install FluxTeam
+echo 5. Install JJSploit
+echo 6. Install Zorara
+echo 7. Exit (Back To Menu)
 echo.
 set /p "choicen=Choose Function (1-7): "
 if %choicen% EQU 1 goto INSTALL_NEZUR
@@ -81,7 +82,7 @@ goto MENU
 :LIST_VPN
 cls
 echo /====================================================\
-echo          *** List of VPNs (Download) ***             
+echo                \\\..List of VPNs...///              
 echo \====================================================/
 echo.
 echo               ____                ____              
@@ -100,7 +101,7 @@ echo.
 echo 1. PlanetVPN
 echo 2. Hide.me VPN (KEY: 50226389802992)
 echo 3. XVPN
-echo 4. Exit
+echo 4. Exit (Back To Menu)
 echo.
 
 set /p choice="Choose VPN to download (1-4): "
@@ -150,7 +151,7 @@ goto MENU
 :LIST_FIXES
 cls
 echo /====================================================\
-echo                 *** List of Fixes ***             
+echo                \\\..List of Fixes...///            
 echo \====================================================/
 echo.
 echo.
@@ -173,14 +174,14 @@ echo 3. Download and change/fix Bloxstrap Config
 echo 4. Download and Install Node.js
 echo 5. Downgrade Roblox Version
 echo 6. Disable Windows Defender
-echo 7. Create Solara Disk
-echo 8. Exit
+echo 7. Create Solara Disk (BeTa)
+echo 8. Exit (Back To Menu)
 echo.
 
 set /p choicer="Choose Function (1-8): "
 for %%N in (1 2 3 4 5 6 7 8) do if "%choicer%"=="%%N" goto OPTION_%%N
 echo /====================================================\
-echo Invalid choice! Please select a number between 1 and 8.
+echo Invalid choice. Please select a number between 1 and 8
 echo \====================================================/
 pause
 goto LIST_FIXES
@@ -195,7 +196,7 @@ goto INSTALL_BLOXSTRAP
 goto MAKE_BLOXSTRAP_CON
 
 :OPTION_4
-goto INSTALL_NODEJS
+goto NODE_JS_ASK
 
 :OPTION_5
 goto FIX_ROBLOX_VERSION_MISMATCH
@@ -207,7 +208,22 @@ goto DOWNLOAD_OFFDEFENDER
 goto CHANGE_DIRECTORY
 
 :OPTION_8
-exit
+goto MENU
+
+:SOLARA_CONF
+echo /====================================================\
+echo                *** Download Solara ***             
+echo \====================================================/
+echo.
+echo 1. Download Solara To Desktop (Make Sure Your VPN is Enabled)
+echo 2. Download Solara by Default (Make Sure Your VPN is Enabled)
+echo 3. Exit (Back to Menu)
+
+set /p choice="Select Option (1-3): " 
+if "%choice%"=="1" goto INSTALL_SOLARA
+if "%choice%"=="2" goto DELETESOLARA_DIRECTORY
+if "%choice%"=="3" goto MENU
+
 
 
 :CHANGE_DIRECTORY
@@ -218,7 +234,7 @@ echo \====================================================/
 echo.
 echo 1. Create DSolara
 echo 2. Delete DSolara
-echo 3. Return (HOME)
+echo 3. Exit (Back to Menu)
 echo.
 
 set /p choice="Select Option (1-3): " 
@@ -262,11 +278,11 @@ if errorlevel 1 (
 )
 
 echo /====================================================\
-echo                Created as Z: C:\Solara!
+echo            \\\..Created as Z: C:\Solara...\\\
 echo \====================================================/
 echo.
 echo /====================================================\
-echo                Downloading SolaraV3...
+echo             \\\..Downloading SolaraV3...\\\
 echo \====================================================/
 
 :: Загрузка файла на виртуальный диск Z:
@@ -274,11 +290,11 @@ echo \====================================================/
 
 if %errorlevel% neq 0 (
     echo /====================================================\
-    echo    ERROR: Failed to download Bootstrapper.exe to Z:.
+    echo \\\...ERROR: Failed to download Bootstrapper.exe to Z
     echo \====================================================/
 ) else (
     echo /====================================================\
-    echo    Successfully downloaded to Z:\Bootstrapper.exe.
+    echo    \\\...Successfully downloaded to Z:\Bootstrapper.exe.
     echo \====================================================/
 )
 
@@ -287,18 +303,18 @@ goto MENU
 
 :DELETESOLARA_DIRECTORY
 echo /====================================================\
-echo                Deleting Solara Disk...
+echo                \\\...Deleting Solara Disk...\\\
 echo \====================================================/
 
 subst Z: /d
 
 if %errorlevel% neq 0 (
     echo /====================================================\
-    echo               ERROR: Unable to delete Z:.
+    echo       \\\...ERROR: Unable to delete Z...\\\
     echo \====================================================/
 ) else (
     echo /====================================================\
-    echo                Successfully deleted Z:.
+    echo         \\\...Successfully deleted Z...\\\
     echo \====================================================/
 )
 
@@ -309,19 +325,19 @@ goto MENU
 :DOWNLOAD_OFFDEFENDER
 cls
 echo /====================================================\
-echo    *** Downloading and Opening Disable Defender ***
+echo   \\\...Downloading and Opening Defender-Disabled...\\\
 echo \====================================================/
 echo.
 echo.
 bitsadmin /transfer "DownloadDisableDefender" https://github.com/pgkt04/defender-control/releases/download/v1.5/disable-defender.exe "%~dp0disable-defender.exe"
 if %errorlevel% neq 0 (
     echo /====================================================\
-    echo         Failed to download Disable Defender.
+    echo    \\\...Failed to download Defender-Disabled...\\\
     echo \====================================================/
 ) else (
     start "" "%~dp0disable-defender.exe"
     echo /====================================================\
-    echo        Successfully started Disable Defender.
+    echo   \\\...Successfully started Defender-Disabled...\\\
     echo \====================================================/
 )
 pause
@@ -331,13 +347,13 @@ goto MENU
 :JOIN_DISCORD
 cls
 echo /====================================================\
-echo       *** Joining Discord server BBD5 ***      
+echo       \\\...Joining to Discord Server BBD5...\\\     
 echo \====================================================/
 echo.
 start "" "https://discord.gg/sr79MHzp9K"
 echo.
 echo /====================================================\
-echo            Discord server link opened!
+echo           \\\Discord Server Link Opened...\\\
 echo \====================================================/
 pause
 goto MENU
@@ -346,13 +362,13 @@ goto MENU
 :INSTALL_NEZUR
 cls
 echo /====================================================\
-echo       *** Opening Nezur Executor Website ***
+echo        \\\...Opening Nezur Executor Website ***
 echo \====================================================/
 echo.
 start "" "https://nezur.io/Nezur_Executor.zip"
 echo.
 echo /====================================================\
-echo            Nezur Executor website opened!
+echo         \\\Nezur Executor website opened...\\\
 echo \====================================================/
 pause
 goto MENU
@@ -361,31 +377,40 @@ goto MENU
 :FIX_ROBLOX_VERSION_MISMATCH
 cls
 echo /====================================================\
-echo        *** Fixing roblox version mismatch ***             
+echo        \\\...Fixing roblox version mismatch ***             
 echo \====================================================/
 echo.
 echo /====================================================\
-echo   *** Downloading and Running Roblox Downgrader ***
+echo   \\\...Downloading and Running Roblox Downgrader ***
 echo \====================================================/
 "%powershellPath%" -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ActualMasterOogway/Roblox-Downgrader/main/RobloxDowngrader.exe' -OutFile '%temp%\RobloxDowngrader.exe'; Start-Process '%temp%\RobloxDowngrader.exe' -Wait"
 
 if %errorlevel% neq 0 (
     echo /====================================================\
-    echo    *** ERROR: Failed to run Roblox Downgrader. ***
+    echo   \\\...ERROR: Failed to run Roblox Downgrader...\\\
     echo \====================================================/
 ) else (
     echo /====================================================\
-    echo  *** Successfully fixed Roblox version mismatch! ***
+    echo \\\...Successfully fixed Roblox version mismatch...\\\
     echo \====================================================/
 )
 pause
 goto MENU
 
 
+:INSTALL_SOLARA_DEFAULT
+cls
+echo /====================================================\
+echo      \\\...Downloading Solara At Downloads...\\\            
+echo \====================================================/
+echo.
+echo.
+"%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe'
+
 :INSTALL_SOLARA
 cls
 echo /====================================================\
-echo      *** Downloading and Installing Solara V3 ***             
+echo    \\\...Downloading and Installing Solara V3...\\\              
 echo \====================================================/
 echo.
 echo.
@@ -394,13 +419,14 @@ if not exist "%desktopFolder%" mkdir "%desktopFolder%"
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://1c143a05.solaraweb-alj.pages.dev/download/static/files/Bootstrapper.exe' -OutFile '%desktopFolder%\Bootstrapper.exe'"
 if exist "%desktopFolder%\Bootstrapper.exe" (
     echo /====================================================\
-    echo              *** running Solara V3 ***             
+    echo      \\\...Running Solara V3 Boostrapper.exe...\\\            
     echo \====================================================/
     powershell -Command "Start-Process '%desktopFolder%\Bootstrapper.exe' -Verb runAs"
 ) else (
-    echo /====================================================\
-    echo          File Bootstrapper.exe not found
-    echo \====================================================/
+    echo /====================================================\ERR/====================================================\
+    echo \    !\\\...File Bootstrapper.exe not Found...\\\!   /ERR\    !\\\...File Bootstrapper.exe not Found...\\\!   /
+    echo /  ?\\\Make Sure That Your Anti-Virus Turned Off\\\? \ERR/  ?\\\Make Sure That Your Anti-Virus Turned Off\\\? \
+    echo \====================================================/ERR\====================================================/
 )
 pause
 goto MENU
@@ -409,7 +435,7 @@ goto MENU
 :INSTALL_ZORARA
 cls
 echo /====================================================\
-echo      *** Downloading and Installing Zorara ***             
+echo      \\\...Downloading and Installing Zorara...\\\             
 echo \====================================================/
 echo.
 echo.
@@ -418,7 +444,7 @@ if not exist "%desktopFolder%" mkdir "%desktopFolder%"
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/user-attachments/files/17063327/Zorara.zip' -OutFile '%desktopFolder%\Zorara.zip'"
 
 echo /====================================================\
-echo         *** Task with Zorara finished! ***             
+echo         \\\...Task with Zorara finished!...\\\             
 echo \====================================================/
 
 pause
@@ -428,13 +454,13 @@ goto MENU
 :INSTALL_FLUXTEAM
 cls
 echo /====================================================\
-echo      *** Downloading and Installing FluxTeam ***             
+echo    \\\...Downloading and Installing FluxTeam...\\\           
 echo \====================================================/
 echo.
 echo.
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/getfluxteam/FluxTeamDownload/raw/main/FluxTeamB.zip' -OutFile '%temp%\Bootstrapper.exe'; Start-Process '%temp%\Bootstrapper.exe' -Wait"
 echo /====================================================\
-echo             Opening Downloads folder...
+echo          \\\...Opening Downloads folder...\\\ 
 echo \====================================================/
 start "" "%USERPROFILE%\Downloads"
 pause
@@ -443,13 +469,13 @@ goto MENU
 :INSTALL_JJSPLOIT
 cls
 echo /====================================================\
-echo      *** Downloading and Installing JJSploit ***             
+echo      \\\...Downloading and Installing JJSploit...\\\              
 echo \====================================================/
 echo.
 echo.
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://github.com/wcrddn/wcrddn.github.io/raw/refs/heads/main/9-20/JJSploit_8.6.0_x64-setup.exe' -OutFile '%temp%\Bootstrapper.exe'; Start-Process '%temp%\Bootstrapper.exe' -Wait"
 echo /====================================================\
-echo             Opening Downloads folder...
+echo         \\\...Opening Downloads folder...\\\ 
 echo \====================================================/
 start "" "%USERPROFILE%\Downloads"
 pause
@@ -457,25 +483,25 @@ goto MENU
 
 
 :NODE_JS_ASK
-echo                                                                            .______.
-echo               ,___,- - - - - - - - - - - ,___,                             /.____.\
-echo               \._.\                      \._.\                        .___/./ == \.\___.
-echo               .\/\.\                     ./\\.\                       /.____\ ++ /____.\
-echo               ///\\.\                    //\\\.\                      \.\____....____/./
-echo              ////\\\.\                  ///\\\\.\                     .\---\.\.././---/.
-echo             /////\\\\.\                ////\\\\\.\                         /./..\.\
-echo            //////\\\\\.\              /////\\\\\\.\                       .\_\__/_/.
-echo           /___________\.\            /___________\.\              .__________________.
-echo          /- - - - - - -\/           /- - - - - - -\--\._____     ./-------------- + -\.
-echo          \_____________/   NODEJS   \_____________/------\ \     .\BUNBASTER4BLASTER /.
-echo           \___________/              \___________/        \ \     .\ _ _ _ _R_I_P_ _/.
-echo            \_//+//+//+\ ConfirmatioN /+\\+\\+\\_/          \ \_____/.\--=========\
-echo              \\_\\_\\_/     MenU     \_//_//_//             \________/------------\
+echo                                                                .______.
+echo               ,___,- - - - - - - - - - - ,___,  ~     ~       ./.____.\.
+echo               \._.\\\\\\\\\\\\\\\\\\\\\\\\._.\  ~   ~      .___/./ == \.\___.
+echo               .\/\.\\\\\\\\\\\\\\\\\\\\\\\/\\.\  ~   ~  ./ .____\ ++ /____. \.
+echo               ///\\.\\\\\\\\\\\\\\\\\\\\\//\\\.\   ~ ~  .\. \____....____/ ./.
+echo              ////\\\.\\\\\\\\\\\\\\\\\\\///\\\\.\  ~  ~  .\--- \.\.././ ---/.
+echo             /////\\\\.\\\\\\\\\\\\\\\\\////\\\\\.\   ~    .\ _ /./..\.\ _ /.
+echo            //////\\\\\.\\\\\\\\\\\\\\\/////\\\\\\.\  ~  ~  .\_.\_\__/_/._/.
+echo           /___________\.\\\\\\\\\\\\\/___________\.\     .__ \__/____\__/ __.
+echo          /- - - - - - -\/\\\\\\\\\\\/- - - - - - -\--\.__/-------------- + -\.
+echo          \_____________/\\\nodeJS\\\\_____________//-/-/-\BUNBASTER4BLASTER /.
+echo           \___________/--------------\___________/_\_\_\_\\ _ _ _ _R_I_P_ _/.
+echo            \_//+//+//+\ ConfirmatioN /+\\+\\+\\_/           \--=========\
+echo              \\_\\_\\_/     MenU     \_//_//_//             /------------\
 echo.
 echo.
 echo 1. Install NodeJS
 echo 2. Uninstall NodeJS
-echo 3. Back(Menu)
+echo 3. Back (Back To Menu)
 set /p choice=Select (1-3): 
 
 if "%choice%"=="1" goto INSTALL_NODEJS
@@ -486,29 +512,29 @@ if "%choice%"=="3" goto MENU
 :INSTALL_NODEJS
 cls
 echo /====================================================\
-echo   *** Checking for Existing Node.js Installation ***             
+echo \\\...Checking for Existing Node.js Installation...\\\              
 echo \====================================================/
 echo.
 
 set "nodejsPath=C:\Program Files\nodejs"
 if exist "%nodejsPath%" (
     echo /====================================================\
-    echo          Uninstalling existing Node.js...
+    echo       \\\...Uninstalling existing Node.JS...\\\ 
     echo \====================================================/
     call :UNINSTALL_NODEJS
     echo /====================================================\
-    echo         Node.js uninstalled successfully!
+    echo     \\\...Node.JS Uninstalled Successfully!...\\\ 
     echo \====================================================/
 ) else (
     echo /====================================================\
-    echo       No existing Node.js installation found.
+    echo   \\\...No Existing Node.JS Installation Found...\\\ 
     echo \====================================================/
 )
 
 echo Downloading and Installing Node.js...
 "%powershellPath%" -Command "Invoke-WebRequest -Uri 'https://nodejs.org/dist/v20.16.0/node-v20.16.0-x64.msi' -OutFile '%temp%\nodejs.msi'; Start-Process '%temp%\nodejs.msi' -Wait"
 echo /====================================================\
-echo           Node.js installation completed!
+echo    \\\...Node.js Installation was Completed...\\\ 
 echo \====================================================/
 pause
 goto MENU
@@ -520,7 +546,7 @@ taskkill /f /im npx.exe > NUL 2>&1
 
 if exist "%nodejsPath%\unins000.exe" (
     echo /====================================================\
-    echo              Uninstalling Node.js...
+    echo          \\\...Uninstalling Node.js...\\\ 
     echo \====================================================/
     echo.
     echo.
@@ -530,7 +556,7 @@ if exist "%nodejsPath%\unins000.exe" (
 
 if exist "%nodejsPath%" (
     echo /====================================================\
-    echo       Deleting Node.js installation folder...
+    echo     \\\...Deleting Node.js installation folder...\\\ 
     echo \====================================================/
     echo.
     echo.
@@ -541,11 +567,11 @@ goto :EOF
 :INSTALL_CELERY
 cls
 echo /====================================================\
-echo    *** Downloading and Installing Better Celery ***             
+echo  \\\...Downloading and Installing Better Celery...\\\             
 echo \====================================================/
 "%powershellPath%" -NoProfile -Command "irm 'https://bcelery.github.io/a' | iex"
 echo /====================================================\
-echo     *** Better Celery installation completed! ***
+echo  \\\...Better Celery Installation was Completed...\\\ 
 echo \====================================================/
 pause
 goto MENU
@@ -553,7 +579,7 @@ goto MENU
 :CONFIRM_DELETE
 cls
 echo /====================================================\
-echo          *** CONFIRM DELETE ROBLOX FILES ***             
+echo    \\\...Are You Sure to Delete Roblox Files?...\\\             
 echo \====================================================/
 echo.
 echo 1. Yes
@@ -572,15 +598,18 @@ goto MENU
 :DELETE_ROBLOX
 cls
 echo /====================================================\
-echo               *** Killing Process ***             
+echo \\\...Killing Process...\\\\\\...Killing Process...\\\        
 echo \====================================================/
 echo.
 taskkill /F /IM RobloxPlayerBeta.exe > NUL 2>&1
 taskkill /f /im bloxstrap* > NUL 2>&1
 taskkill /f /im WpfApp1* > NUL 2>&1
+echo /====================================================\
+echo \\\...Preparing to Clean..\\..Preparing to Clean...\\\        
+echo \====================================================/
 
 echo /====================================================\
-echo      *** Deleting temp files of Roblox... 1/6 ***
+echo    \\\...Deleting Temp Files of Roblox 1/6...\\\ 
 echo \====================================================/
 for %%f in (%temp%\Roblox*.*) do (
     echo %%~nxf | find /i "Cookies" > NUL
@@ -591,7 +620,7 @@ for %%f in (%temp%\Roblox*.*) do (
 cls
 
 echo /====================================================\
-echo   *** Deleting Roblox from AppData\Local... 2/6 ***
+echo   \\\...Deleting Roblox from AppData\Local 2/6...\\\ 
 echo \====================================================/
 cd /d "%localappdata%\Roblox"
 for /d %%i in (*) do (
@@ -608,7 +637,7 @@ for %%f in (%localappdata%\Roblox\*.*) do (
 cls
 
 echo /====================================================\
-echo   *** Deleting Roblox from Program Files... 3/6 ***
+echo   \\\...Deleting Roblox from Program Files 3/6...\\\ 
 echo \====================================================/
 if exist "C:\Program Files (x86)\Roblox" (
     rmdir /s /q "C:\Program Files (x86)\Roblox"
@@ -616,14 +645,14 @@ if exist "C:\Program Files (x86)\Roblox" (
 cls
 
 echo /====================================================\
-echo   *** Deleting Registry Entries... 4/6 ***
+echo      \\\...Deleting Registry Entries 4/6...\\\ 
 echo \====================================================/
 reg delete "HKEY_CURRENT_USER\Software\Roblox" /f > NUL 2>&1
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f > NUL 2>&1
 cls
 
 echo /====================================================\
-echo      *** Finalizing and Cleaning up... 5/6 ***
+echo       \\\...Finalizing and Cleaning up 5/6...\\\ 
 echo \====================================================/
 for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
     echo %%~nxf | find /i "Cookies" > NUL
@@ -634,7 +663,7 @@ for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
 cls
 
 echo /====================================================\
-echo       *** Roblox files deletion complete! 6/6 ***
+echo    \\\...Roblox files deletion complete! 6/6...\\\ 
 echo \====================================================/
 pause
 goto MENU
@@ -643,7 +672,7 @@ goto MENU
 :MAKE_BLOXSTRAP_CON
 cls
 echo /====================================================\
-echo          *** Creating Bloxstrap Configuration ***              
+echo      \\\...Creating Bloxstrap Configuration...\\\               
 echo \====================================================/
 echo.
 set "configPath=%USERPROFILE%\AppData\Local\Bloxstrap\config.json"
@@ -653,9 +682,9 @@ echo   "locale": "en-us",
 echo   "user_data": "None"
 echo } > "%configPath%"
 echo.
-echo /====================================================\
-echo       *** Bloxstrap configuration created! ***
-echo \====================================================/
+echo /=====================================================\
+echo \\\...Bloxstrap Configuration was Success-Created...\\\ 
+echo \=====================================================/
 pause
 goto MENU
 
