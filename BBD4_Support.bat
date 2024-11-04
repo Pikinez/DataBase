@@ -1,25 +1,25 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title DARK_BATON-BBD5-V0.9.3
+title DARK_BATON-BBD5-V0.9.5
 :MENU
 cls
-echo        .____________________________________________________.roblox
-echo       ./====================================================\.javascript
-echo       .\DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###/.chrome   
-echo       ./DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###\.disc                     
-echo       .\\==================================================//.price
-echo        -=\.______________________________________________./=-.pvp
-echo           \\\########::'########::'########::'########:///.py
-echo            \\##.... ##: ##.... ##: ##.... ##: ##.....:://.lua
-echo             \##:::: ##: ##:::: ##: ##:::: ##: ##:::::::/.ruby
-echo             /########:: ########:: ##:::: ##: #######::\.go
-echo            //##.... ##: ##.... ##: ##:::: ##:...... ##:\\.exe
-echo            \/##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:\/.win
-echo            \/########:: ########:: ########::. ######::\/.shell
-echo     .______//........:::........:::........::::......::\\______.fade
-echo     .\-____\____________________________________________/____-/.vpn
-echo      .\-___ \__________________________________________/ ___-/.zip
-echo       .\-__/-\._____________...........______________./-\__-/.rar
+echo        .____________________________________________________.roblox V0.9.5
+echo       ./====================================================\.javascript V0.9.5
+echo       .\DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###/.chrome V0.9.5
+echo       ./DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###DaRk_BaToN###\.disc V0.9.5            
+echo       .\\==================================================//.price V0.9.5
+echo        -=\.______________________________________________./=-.pvp V0.9.5
+echo           \\\########::'########::'########::'########:///.py V0.9.5
+echo            \\##.... ##: ##.... ##: ##.... ##: ##.....:://.lua V0.9.5
+echo             \##:::: ##: ##:::: ##: ##:::: ##: ##:::::::/.ruby V0.9.5
+echo             /########:: ########:: ##:::: ##: #######::\.go V0.9.5
+echo            //##.... ##: ##.... ##: ##:::: ##:...... ##:\\.exe V0.9.5
+echo            \/##:::: ##: ##:::: ##: ##:::: ##:'##::: ##:\/.win V0.9.5
+echo            \/########:: ########:: ########::. ######::\/.shell V0.9.5
+echo     .______//........:::........:::........::::......::\\______.fade V0.9.5
+echo     .\-____\____________________________________________/____-/.vpn V0.9.5
+echo      .\-___ \__________________________________________/ ___-/.zip V0.9.5
+echo       .\-__/-\._____________...........______________./-\__-/.rar V0.9.5
 echo               \_\_\_\_\_\_/ \ BrRrRrO /  \_\_\_\_\_\_/
 echo               //+//+//+//+\ .DARK_BATON. /+\\+\\+\\+\\
 echo               \\_\\_\\_\\_/              \_//_//_//_//
@@ -598,29 +598,33 @@ goto MENU
 :DELETE_ROBLOX
 cls
 echo /====================================================\
-echo \\\...Killing Process...\\\\\\...Killing Process...\\\        
+echo \\\.....STARTED.........\\\\\\...Killing Process...\\\        
 echo \====================================================/
 echo.
 taskkill /F /IM RobloxPlayerBeta.exe > NUL 2>&1
 taskkill /f /im bloxstrap* > NUL 2>&1
 taskkill /f /im WpfApp1* > NUL 2>&1
-echo /====================================================\
-echo \\\...Preparing to Clean..\\..Preparing to Clean...\\\        
-echo \====================================================/
 
 echo /====================================================\
-echo    \\\...Deleting Temp Files of Roblox 1/6...\\\ 
+echo    \\\...Deleting Temp Files of Roblox...\\\             <>-<1\10>-<>
 echo \====================================================/
-for %%f in (%temp%\Roblox*.*) do (
-    echo %%~nxf | find /i "Cookies" > NUL
-    if errorlevel 1 (
-        del /q "%%f"
-    )
-)
+del /s /q %temp%\*
 cls
 
 echo /====================================================\
-echo   \\\...Deleting Roblox from AppData\Local 2/6...\\\ 
+echo        \\\...Deleting Bloxstrap Logs...\\\               <>-<2\10>-<>
+echo \====================================================/
+del /s /q %localappdata%\Bloxstrap\Logs*
+cls
+
+echo /====================================================\
+echo    \\\...Deleting Wave-Blue.ico from Bloxstrap...\\\     <>-<3\10>-<>
+echo \====================================================/
+del /s /q %localappdata%\Bloxstrap\Wave-Blue.ico
+cls
+
+echo /====================================================\
+echo   \\\...Deleting Roblox from AppData\Local...\\\         <>-<4\10>-<>
 echo \====================================================/
 cd /d "%localappdata%\Roblox"
 for /d %%i in (*) do (
@@ -637,22 +641,38 @@ for %%f in (%localappdata%\Roblox\*.*) do (
 cls
 
 echo /====================================================\
-echo   \\\...Deleting Roblox from Program Files 3/6...\\\ 
+echo      \\\...Clearing Potential Downgrades..\\\            <>-<5\10>-<>
+echo \====================================================/
+rd /s /q %localappdata%\Bloxstrap\Versions\*
+rd /s /q %localappdata%\Roblox\Versions\*
+cls
+
+echo /====================================================\
+echo \\\...Deleting\Cleaning Roblox from Program Files..\\\   <>-<6\10>-<> 
 echo \====================================================/
 if exist "C:\Program Files (x86)\Roblox" (
     rmdir /s /q "C:\Program Files (x86)\Roblox"
 )
+
+rd /s /q %localappdata%\Roblox\LocalStorage\*
+rd /s /q %localappdata%\Roblox\logs\*
 cls
 
 echo /====================================================\
-echo      \\\...Deleting Registry Entries 4/6...\\\ 
+echo      \\\...Deleting Registry Entries...\\\               <>-<7\10>-<>
 echo \====================================================/
 reg delete "HKEY_CURRENT_USER\Software\Roblox" /f > NUL 2>&1
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f > NUL 2>&1
 cls
 
 echo /====================================================\
-echo       \\\...Finalizing and Cleaning up 5/6...\\\ 
+echo      \\\...Deleting Registry Entries...\\\               <>-<8\10>-<>
+echo \====================================================/
+del /s /q C:\Windows\Prefetch\*
+cls
+
+echo /====================================================\
+echo       \\\...Finalizing and Cleaning up Bin...\\\         <>-<9\10>-<>
 echo \====================================================/
 for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
     echo %%~nxf | find /i "Cookies" > NUL
@@ -660,11 +680,21 @@ for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
         del /q "%%f"
     )
 )
+del /s /q C:\$Recycle.Bin\*
 cls
 
-echo /====================================================\
-echo    \\\...Roblox files deletion complete! 6/6...\\\ 
+echo /====================================================\  
+echo       \\\...Resetting Network and DNS...\\\              <>-<10\10>-<>
 echo \====================================================/
+netsh int ip reset
+netsh winsock reset
+ipconfig /flushdns
+cls
+
+echo /\==========================================================================/\
+echo \\\...Roblox files deletion complete!...\\\...Network may Fall for Second...\\\ <>-<FINISHED>-<>
+echo  \/==========================================================================\/
+echo   \\------------------------------------------------------------------------//
 pause
 goto MENU
 
