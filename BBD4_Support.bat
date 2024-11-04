@@ -601,9 +601,34 @@ echo /====================================================\
 echo \\\.....STARTED.........\\\\\\...Killing Process...\\\        
 echo \====================================================/
 echo.
-taskkill /F /IM RobloxPlayerBeta.exe > NUL 2>&1
-taskkill /f /im bloxstrap* > NUL 2>&1
-taskkill /f /im WpfApp1* > NUL 2>&1
+
+tasklist /FI "IMAGENAME eq RobloxPlayerBeta.exe" 2>NUL | find /I "RobloxPlayerBeta.exe" >NUL
+if not errorlevel 1 (
+    echo /====================================================\
+    echo      1ERR- RobloxPlayerBeta.exe need to be closed.
+    echo \====================================================/
+    pause
+    goto MENU
+)
+
+tasklist /FI "IMAGENAME eq bloxstrap*" 2>NUL | find /I "bloxstrap" >NUL
+if not errorlevel 1 (
+    echo /====================================================\
+    echo           1ERR- Bloxstrap need to be closed.
+    echo \====================================================/
+    pause
+    goto MENU
+)
+
+tasklist /FI "IMAGENAME eq WpfApp1*" 2>NUL | find /I "WpfApp1" >NUL
+if not errorlevel 1 (
+    echo /====================================================\
+    echo      1ERR- WpfApp1 need to be closed. \Solara\
+    echo \====================================================/
+
+    pause
+    goto MENU
+)
 
 echo /====================================================\
 echo    \\\...Deleting Temp Files of Roblox...\\\             /---1\10---\
