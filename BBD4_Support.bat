@@ -606,25 +606,25 @@ taskkill /f /im bloxstrap* > NUL 2>&1
 taskkill /f /im WpfApp1* > NUL 2>&1
 
 echo /====================================================\
-echo    \\\...Deleting Temp Files of Roblox...\\\             <>-<1\10>-<>
+echo    \\\...Deleting Temp Files of Roblox...\\\             /---1\10---\
 echo \====================================================/
 del /s /q %temp%\*
 cls
 
 echo /====================================================\
-echo        \\\...Deleting Bloxstrap Logs...\\\               <>-<2\10>-<>
+echo        \\\...Deleting Bloxstrap Logs...\\\               /---2\10---\
 echo \====================================================/
 del /s /q %localappdata%\Bloxstrap\Logs*
 cls
 
 echo /====================================================\
-echo    \\\...Deleting Wave-Blue.ico from Bloxstrap...\\\     <>-<3\10>-<>
+echo    \\\...Deleting Wave-Blue.ico from Bloxstrap...\\\     /---3\10---\
 echo \====================================================/
 del /s /q %localappdata%\Bloxstrap\Wave-Blue.ico
 cls
 
 echo /====================================================\
-echo   \\\...Deleting Roblox from AppData\Local...\\\         <>-<4\10>-<>
+echo   \\\...Deleting Roblox from AppData\Local...\\\         /---4\10---\
 echo \====================================================/
 cd /d "%localappdata%\Roblox"
 for /d %%i in (*) do (
@@ -641,14 +641,14 @@ for %%f in (%localappdata%\Roblox\*.*) do (
 cls
 
 echo /====================================================\
-echo      \\\...Clearing Potential Downgrades..\\\            <>-<5\10>-<>
+echo      \\\...Clearing Potential Downgrades..\\\            /---5\10---\
 echo \====================================================/
 rd /s /q %localappdata%\Bloxstrap\Versions\*
 rd /s /q %localappdata%\Roblox\Versions\*
 cls
 
 echo /====================================================\
-echo \\\...Deleting\Cleaning Roblox from Program Files..\\\   <>-<6\10>-<> 
+echo \\\...Deleting\Cleaning Roblox from Program Files..\\\   /---6\10---\
 echo \====================================================/
 if exist "C:\Program Files (x86)\Roblox" (
     rmdir /s /q "C:\Program Files (x86)\Roblox"
@@ -659,20 +659,20 @@ rd /s /q %localappdata%\Roblox\logs\*
 cls
 
 echo /====================================================\
-echo      \\\...Deleting Registry Entries...\\\               <>-<7\10>-<>
+echo      \\\...Deleting Registry Entries...\\\               /---7\10---\
 echo \====================================================/
 reg delete "HKEY_CURRENT_USER\Software\Roblox" /f > NUL 2>&1
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f > NUL 2>&1
 cls
 
 echo /====================================================\
-echo      \\\...Deleting Registry Entries...\\\               <>-<8\10>-<>
+echo      \\\...Deleting Registry Entries...\\\               /---8\10---\
 echo \====================================================/
 del /s /q C:\Windows\Prefetch\*
 cls
 
 echo /====================================================\
-echo       \\\...Finalizing and Cleaning up Bin...\\\         <>-<9\10>-<>
+echo       \\\...Finalizing and Cleaning up Bin...\\\         /---9\10---\
 echo \====================================================/
 for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
     echo %%~nxf | find /i "Cookies" > NUL
@@ -684,7 +684,7 @@ del /s /q C:\$Recycle.Bin\*
 cls
 
 echo /====================================================\  
-echo       \\\...Resetting Network and DNS...\\\              <>-<10\10>-<>
+echo       \\\...Resetting Network and DNS...\\\              /---10\10---\
 echo \====================================================/
 netsh int ip reset
 netsh winsock reset
@@ -692,7 +692,7 @@ ipconfig /flushdns
 cls
 
 echo /\==========================================================================/\
-echo \\\...Roblox files deletion complete!...\\\...Network may Fall for Second...\\\ <>-<FINISHED>-<>
+echo \\\...Roblox files deletion complete!...\\\...Network may Fall for Second...\\\ /---FINISHED---\
 echo  \/==========================================================================\/
 echo   \\------------------------------------------------------------------------//
 pause
