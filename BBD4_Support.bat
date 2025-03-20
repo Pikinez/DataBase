@@ -1,6 +1,6 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title Support-BBD5-V1.0.0
+title Support-BBD5-V1.0.1
 Color 0A & Mode con cols=68 lines=28
 :MENU
 cls
@@ -177,7 +177,7 @@ echo.
 echo.
 echo  1. Delete \Hash\Con\Trash of Roblox\Exploits (FIX)
 echo 2. Download and Install/open Latest Bloxstrap Version
-echo  3. Download and fix Bloxstrap Config (No sense)
+echo  3. Solara download(from alt\server) 
 echo 4. Download and Install Node.js (No sense)
 echo  5. Downgrade Roblox Version (Disabled)
 echo 6. Disable Windows Defender (No sense)
@@ -752,22 +752,35 @@ goto MENU
 
 :MAKE_BLOXSTRAP_CON
 cls
+color 09
 echo /====================================================\
-echo      \\\...Creating Bloxstrap Configuration...\\\               
+echo      \\\...Downloading Solara from github...\\\               
 echo \====================================================/
 echo.
-set "configPath=%USERPROFILE%\AppData\Local\Bloxstrap\config.json"
-echo {
-echo   "game": "roblox",
-echo   "locale": "en-us",
-echo   "user_data": "None"
-echo } > "%configPath%"
-echo.
-echo /==========================================\
-echo \\\...Bloxstrap Configuration was Fixed...\\\ 
-echo \===========================================/
+
+powershell -Command "Invoke-WebRequest -Uri https://github.com/Pikinez/ssl/raw/refs/heads/main/Solara.zip -OutFile %TEMP%\Solara.zip"
+
+if exist %TEMP%\Solara.zip (
+    cls
+    color 0E
+    echo /====================================================\
+    echo             \\\...Unpacking Solara...\\\               
+    echo \====================================================/
+    powershell -Command "Expand-Archive -Path %TEMP%\Solara.zip -DestinationPath %programdata% -Force"
+    del %TEMP%\Solara.zip
+    cls
+    echo /====================================================\
+    echo    \\\...Solara was downloaded and installed...\\\               
+    echo \====================================================/
+) else (
+    color 0C
+    echo /====================================================\
+    echo      \\\...Error, Solara was not downloaded...\\\               
+    echo \====================================================/
+)
 pause
 goto MENU
+
 
 :END
 cls
