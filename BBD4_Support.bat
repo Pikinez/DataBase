@@ -1,6 +1,6 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title Support-BBD5-V1.0.1
+title Support-BBD5-V1.0.2
 Color 0A & Mode con cols=68 lines=28
 :MENU
 cls
@@ -181,7 +181,7 @@ echo  3. Solara download(from alt\server)
 echo 4. Download and Install Node.js (No sense)
 echo  5. Downgrade Roblox Version (Disabled)
 echo 6. Disable Windows Defender (No sense)
-echo  7. Create Solara Disk (Disabled)
+echo  7. HotFix Velocity (AT YOUR OWN RISK)
 echo                      8. Back
 echo.
 
@@ -636,6 +636,16 @@ if not errorlevel 1 (
     goto MENU
 )
 
+tasklist /FI "IMAGENAME eq RobloxPlayerBeta.exe" 2>NUL | find /I "RobloxPlayerBeta.exe" >NUL
+if not errorlevel 1 (
+    color 0C
+    echo /====================================================\
+    echo      1ERR- RobloxPlayerBeta.exe need to be closed.
+    echo \====================================================/
+    pause
+    goto MENU
+)
+
 tasklist /FI "IMAGENAME eq bloxstrap*" 2>NUL | find /I "bloxstrap" >NUL
 if not errorlevel 1 (
     color 0C
@@ -672,7 +682,7 @@ cls
 echo /====================================================\
 echo    \\\...Deleting Wave-Blue.ico from Bloxstrap...\\\     /---3\10---\
 echo \====================================================/
-del /s /q %localappdata%\Bloxstrap\Wave-Blue.ico
+
 cls
 
 echo /====================================================\
@@ -693,7 +703,7 @@ for %%f in (%localappdata%\Roblox\*.*) do (
 cls
 
 echo /====================================================\
-echo      \\\...Clearing Potential Downgrades..\\\            /---5\10---\
+echo  \\\...Clearing Potential Downgrades + Register..\\\     /---5\10---\
 echo \====================================================/
 rd /s /q %localappdata%\\Bloxstrap\\Versions\\*
 rd /s /q %localappdata%\\Roblox\\Versions\\*
@@ -718,9 +728,17 @@ reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f > NUL 2>&1
 cls
 
 echo /====================================================\
-echo      \\\...Deleting Registry Entries...\\\               /---8\10---\
+echo      \\\...Deleting Registry and VelocityF...\\\               /---8\10---\
 echo \====================================================/
 del /s /q C:\Windows\Prefetch\*
+taskkill /IM Velocity.exe /F >nul 2>&1
+taskkill /IM Velocity* /F >nul 2>&1
+for %%K in (HKLM HKCU) do (
+    for /f "tokens=*" %%A in ('reg query %%K\Software /s /f "Velocity" 2^>nul ^| findstr "HKEY"') do (
+        echo d: %%A
+        reg delete "%%A" /f >nul 2>&1
+    )
+)
 cls
 
 echo /====================================================\
