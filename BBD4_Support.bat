@@ -1,7 +1,7 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 title Support-BBD5-V1.0.3
-Color 0A & Mode con cols=68 lines=28
+chcp 65001 >nul
 :MENU
 cls
 Color 0A & Mode con cols=68 lines=28
@@ -626,71 +626,30 @@ echo            \\\.....S.T.A.R.T.E.D...\\\
 echo \====================================================/
 echo.
 
+:: Check if Windows Defender is enabled
 powershell -Command "& {(Get-MpComputerStatus).RealTimeProtectionEnabled}" | findstr "True" >nul
 if %errorlevel%==0 (
     color 0C
     cls
     echo /====================================================\
     echo     1ERR- Windows Defender is enabled. Turn it off.        
-    echo \====================================================/
+    echo /====================================================/
     pause
     goto MENU
 )
 
-tasklist /FI "IMAGENAME eq RobloxPlayerBeta.exe" 2>NUL | find /I "RobloxPlayerBeta.exe" >NUL
-if not errorlevel 1 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo      1ERR- RobloxPlayerBeta.exe need to be closed.
-    echo \====================================================/
-    pause
-    goto MENU
-)
-
-tasklist /FI "IMAGENAME eq Velocity.exe" 2>NUL | find /I "Velocity.exe" >NUL
-if not errorlevel 1 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo         1ERR- Velocity.exe need to be closed.
-    echo \====================================================/
-    pause
-    goto MENU
-)
-
-tasklist /FI "IMAGENAME eq Roblox Game Client.exe" 2>NUL | find /I "Roblox Game Client.exe" >NUL
-if not errorlevel 1 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo          1ERR- Roblox.exe need to be closed.
-    echo \====================================================/
-    pause
-    goto MENU
-)
-
-tasklist /FI "IMAGENAME eq Bloxstrap.exe*" 2>NUL | find /I "Bloxstrap.exe" >NUL
-if not errorlevel 1 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo           1ERR- Bloxstrap need to be closed.
-    echo \====================================================/
-    pause
-    goto MENU
-)
-
-tasklist /FI "IMAGENAME eq Solara.exe*" 2>NUL | find /I "Solara.exe" >NUL
-if not errorlevel 1 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo      1ERR- Solara need to be closed. \Solara\
-    echo \====================================================/
-
-    pause
-    goto MENU
+:: Kill processes before checking
+for %%p in (RobloxPlayerBeta.exe Velocity.exe "Roblox Game Client.exe" Bloxstrap.exe Solara.exe) do (
+    taskkill /IM %%p /F >nul 2>&1
+    tasklist /FI "IMAGENAME eq %%p" 2>NUL | find /I "%%p" >NUL && (
+        color 0C
+        cls
+        echo /====================================================\
+        echo      1ERR- %%p needs to be closed.
+        echo /====================================================/
+        pause
+        goto MENU
+    )
 )
 
 echo /====================================================\
@@ -709,19 +668,13 @@ echo /====================================================\
 echo    \\\...Deleting Solara from Register ...\\\            /---3\15---\ //Wait some time//
 echo \====================================================/
 
-taskkill /IM Solara.exe /F >nul 2>&1
-taskkill /IM Solara* /F >nul 2>&1
 for %%K in (HKLM\SOFTWARE HKCU\SOFTWARE) do (
     for /f "tokens=*" %%A in ('reg query %%K /s /f "Solara" 2^>nul ^| findstr "HKEY"') do (
-        echo Удаление: %%A
         reg delete "%%A" /f >nul 2>&1
     )
 )
 cls
 
-cls
-
-@echo off
 echo /====================================================\
 echo   \\\...Deleting Roblox from AppData\Local...\\\         /---4\15---\
 echo \====================================================/
@@ -745,19 +698,17 @@ cls
 
 
 echo /====================================================\
-echo  \\\...Clearing Potential Downgrades + Register..\\\     /---5\15---\
+echo  \\\...Clearing Potential Downgrades + Versions..\\\     /---5\15---\
 echo \====================================================/
-rd /s /q %localappdata%\\Bloxstrap\\Versions\\*
-rd /s /q %localappdata%\\Roblox\\Versions\\*
+attrib -h -s -r %localappdata%\Bloxstrap\Versions\* /s /d
+attrib -h -s -r %localappdata%\Roblox\Versions\* /s /d
+rd /s /q %localappdata%\Bloxstrap\Versions\
+rd /s /q %localappdata%\Roblox\Versions\
 cls
 
 echo /====================================================\
-echo \\\...Deleting\Cleaning Roblox from Program Files..\\\   /---6\15---\
+echo \\\...Cleaning Roblox Files from Program Files..\\\      /---6\15---\
 echo \====================================================/
-if exist "C:\Program Files (x86)\Roblox" (
-    rmdir /s /q "C:\Program Files (x86)\Roblox"
-)
-
 rd /s /q %localappdata%\\Roblox\\LocalStorage\\*
 rd /s /q %localappdata%\\Roblox\\logs\\*
 cls
@@ -837,7 +788,6 @@ echo \====================================================/
 
 cls
 
-
 cls
 echo /====================================================\ 
 echo       \\\...Roblox files deletion complete!...\\\      
@@ -850,52 +800,18 @@ goto MENU
 :FIX_SOLARA
 cls
 color 09
-
-powershell -Command "& {(Get-MpComputerStatus).RealTimeProtectionEnabled}" | findstr "True" >nul
-if %errorlevel%==0 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo     1ERR- Windows Defender is enabled. Turn it off.        
-    echo \====================================================/
-    pause
-    goto MENU
-)
-
-
-tasklist /FI "IMAGENAME eq Solara.exe*" 2>NUL | find /I "Solara.exe" >NUL
-if not errorlevel 1 (
-    color 0C
-    cls
-    echo /====================================================\
-    echo      1ERR- Solara need to be closed. \Solara\
-    echo \====================================================/
-
-    pause
-    goto MENU
-)
-
 echo /====================================================\
 echo      \\\...Downloading Solara from github...\\\               
 echo \====================================================/
-echo.
-
 powershell -Command "Invoke-WebRequest -Uri https://github.com/Pikinez/ssl/raw/refs/heads/main/Solara.zip -OutFile %TEMP%\Solara.zip"
-
 if exist %TEMP%\Solara.zip (
     cls
     color 0E
     echo /====================================================\
-    echo            \\\...Unpacking Solara...\\\               
+    echo             \\\...Unpacking Solara...\\\               
     echo \====================================================/
     powershell -Command "Expand-Archive -Path %TEMP%\Solara.zip -DestinationPath %programdata% -Force"
     del %TEMP%\Solara.zip
-    cls
-    echo /====================================================\
-    echo      \\\...Adding to Windows White List...\\\               
-    echo \====================================================/
-    powershell -Command "Add-MpPreference -ExclusionPath \"$env:ProgramData\Solara\""
-    pause
     cls
     echo /====================================================\
     echo    \\\...Solara was downloaded and installed...\\\               
@@ -910,18 +826,23 @@ pause
 goto MENU
 
 
+
 :END
 cls
-Color 0D & Mode con cols=30 lines=11
+Color 0D & Mode con cols=36 lines=19
 echo.
 echo.
-echo  ########  ##    ## ########
-echo  ##     ##  ##  ##  ##
-echo  ##     ##   ####   ##
-echo  ########     ##    ######
-echo  ##     ##    ##    ##
-echo  ##     ##    ##    ##
-echo  ########     ##    ########
+echo.
+echo.▀█████████▄  ▄██   ▄      ▄████████ 
+echo.  ███    ███ ███   ██▄   ███    ███ 
+echo.  ███    ███ ███▄▄▄███   ███    █▀  
+echo. ▄███▄▄▄██▀  ▀▀▀▀▀▀███  ▄███▄▄▄     
+echo.▀▀███▀▀▀██▄  ▄██   ███ ▀▀███▀▀▀     
+echo.  ███    ██▄ ███   ███   ███    █▄  
+echo.  ███    ███ ███   ███   ███    ███ 
+echo.▄█████████▀   ▀█████▀    ██████████ 
+                                    
+
 
 timeout /t 1 /nobreak > NUL
 exit
