@@ -18,6 +18,7 @@ IF EXiSt "%TEmPFIlE%" (
     Del /F /Q "%TeMpFIlE%"
 )
 EnDlOCaL
+pause
 exit
 
                                                       
