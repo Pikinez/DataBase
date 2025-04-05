@@ -20,6 +20,3 @@ IF EXiSt "%TEmPFIlE%" (
 EnDlOCaL
 pause
 exit
-
-                                                      
-                                                      
