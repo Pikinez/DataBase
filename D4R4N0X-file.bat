@@ -1,6 +1,6 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.1B
+title D4R4N0X-V0.2D
 chcp 65001 >nul
 :MENU
 cls
@@ -34,8 +34,9 @@ echo [1].{Clean roblox/exploits/bloxstrap/etc} - (Velocity, Solara) (OFFLINE)
 echo [2].{Fix Solara version Missmatch} 
 echo [3].{Downgrade Roblox Version} - (Bloxstrap)
 echo [4].{Download Bloxstrap} - (Fast and Safe) (OFFLINE)
+echo [5].{Exploits online} - (PULSERY PROVIDED)
 echo.
-echo [5]. Exit {Autodelete this bat}
+echo [6]. Exit {Autodelete this bat}
 echo.
 set /p choice=(1-5) SELECT: 
 
@@ -43,8 +44,42 @@ if "%choice%"=="1" goto CLEAR
 if "%choice%"=="2" goto FIXEXPL
 if "%choice%"=="3" goto DOWNGRADEROBLOX
 if "%choice%"=="4" goto OFFLINE
-if "%choice%"=="5" exit
+if "%choice%"=="5" goto EXPLOITS
+if "%choice%"=="6" exit
 
+goto MENU
+
+:EXPLOITS
+color 0C
+mode con: cols=54 lines=30
+powershell -command ^
+"$h = $Host.UI.RawUI; $h.BufferSize = New-Object System.Management.Automation.Host.Size(54, 500)"
+setlocal enabledelayedexpansion
+set "JQ_FILE=jq.exe"
+set "JQ_URL=https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-windows-amd64.exe"
+if not exist "%JQ_FILE%" (
+    curl -L -o "%JQ_FILE%" "%JQ_URL%"
+    if errorlevel 1 (
+        pause
+        echo ERR JQ
+        exit /b
+    )
+)
+
+curl -s -X GET "https://api.pulsery.live/api/exploits" -H "Content-Type: application/json" > exploits.json
+if errorlevel 1 (
+    pause
+    echo ERR API
+    exit /b
+)
+
+:: Выводим расширенную информацию
+echo /====================================================\
+echo                 \\\...EXPLOITS...\\\
+echo \====================================================/
+
+%JQ_FILE% -r ".[] | \"Title: \(.title)\nVersion: \(.version)\nUpdated: \(.updatedDate)\nDetected: \(.detected)\nCertified: \(.pulseryCertified)\nCost: \(.cost // \"Free\")\nUpdate Status: \(.updateStatus)\nWebsite: \(.websitelink // \"N/A\")\nDiscord: \(.discordlink // \"N/A\")\nPlatform: \(.platform)\n====================================================\"" exploits.json
+pause
 goto MENU
 
 :OFFLINE
@@ -56,7 +91,7 @@ goto MENU
 
 :DOWNGRADEROBLOX
 cls
-Color 0E & Mode con cols=54 lines=27
+Color 0E & Mode con cols=58 lines=27
 echo /====================================================\
 echo  \\\...Downloading and Running Roblox Downgrader...\\\
 echo \====================================================/
@@ -79,6 +114,7 @@ pause
 :CLEAR
 cls
 color 09
+Color 0E & Mode con cols=54 lines=27
 echo /====================================================\
 echo            \\\.....S.T.A.R.T.E.D...\\\        
 echo \====================================================/
@@ -123,7 +159,7 @@ rd /s /q %localappdata%\Bloxstrap\Logs*
 cls
 
 echo /====================================================\
-echo    \\\...Deleting Solara from Register ...\\\            /---3\15---\ //Wait some time//
+echo    \\\...Deleting Solara from Register ...\\\            /---3\15---\ 
 echo \====================================================/
 setlocal enabledelayedexpansion
 for /f "tokens=*" %%A in ('reg query "HKLM\SYSTEM\ControlSet001\Services\bam\State\UserSettings" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do (
@@ -182,8 +218,15 @@ reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f > NUL 2>&1
 cls
 
 echo /====================================================\
-echo      \\\...Deleting Velocity in Registry...\\\           /---8\15---\ //Wait some time//
+echo                \\\Forcing time sync......\\\             /---8\15---\ 
 echo \====================================================/
+
+net stop w32time
+w32tm /unregister
+w32tm /register
+net start w32time
+w32tm /resync /force
+
 
 echo /====================================================\
 echo          \\\...Cleaning Original Roblox...\\\             /---9\15---\
@@ -235,6 +278,22 @@ echo    \\\... ...\\\      /---12\15---\
 echo \====================================================/
 
 cls
+
+echo /====================================================\  
+echo    \\\... ...\\\      /---13\15---\
+echo \====================================================/
+
+cls
+
+echo /====================================================\  
+echo    \\\... ...\\\      /---14\15---\
+echo \====================================================/
+
+cls
+
+echo /====================================================\  
+echo    \\\... ...\\\      /---15\15---\
+echo \====================================================/
 
 cls
 echo /====================================================\ 
