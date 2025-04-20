@@ -1,6 +1,6 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.2D
+title D4R4N0X-V0.2.1D
 chcp 65001 >nul
 :MENU
 cls
@@ -153,9 +153,10 @@ rd /s /q %temp%\Roblox*
 cls
 
 echo /====================================================\
-echo        \\\...Deleting Bloxstrap Logs...\\\               /---2\15---\
+echo        \\\...Deleting Blox/fish<strap> Logs...\\\        /---2\15---\
 echo \====================================================/
 rd /s /q %localappdata%\Bloxstrap\Logs*
+rd /s /q %localappdata%\Fishstrap\Logs*
 cls
 
 echo /====================================================\
@@ -178,17 +179,11 @@ echo \====================================================/
 
 cd /d "%localappdata%\Roblox"
 
-for /d %%i in (*) do (
-    if /i not "%%i"=="LocalStorage" (
-        rmdir /s /q "%%i"
-    )
-)
+for /d %%i in (*) do ( if /i not "%%i"=="LocalStorage" ( rmdir /s /q "%%i" ) )
 
 for %%f in (*.*) do (
     echo %%f | find /i "Cookies" > nul
-    if errorlevel 1 (
-        del /q "%%f"
-    )
+    if errorlevel 1 ( del /q "%%f" )
 )
 
 cls
@@ -199,6 +194,9 @@ echo  \\\...Clearing Potential Downgrades + Versions..\\\     /---5\15---\
 echo \====================================================/
 attrib -h -s -r %localappdata%\Bloxstrap\Versions\* /s /d
 attrib -h -s -r %localappdata%\Roblox\Versions\* /s /d
+attrib -h -s -r %localappdata%\Fishstrap\Versions* /s /d
+
+rd /s /q %localappdata%\Fishstrap\Versions\
 rd /s /q %localappdata%\Bloxstrap\Versions\
 rd /s /q %localappdata%\Roblox\Versions\
 cls
@@ -297,8 +295,8 @@ echo \====================================================/
 
 cls
 echo /====================================================\ 
-echo       \\\...Roblox files deletion complete!...\\\      
-echo                   /---FINISHED---\
+echo       \\\...Finished-d-d-d-d-d-d-d-d-d-d-d-d...\\\      
+echo              !!DO NOT SHARE PHOTOS THERE!!
 echo \====================================================/
 pause
 goto MENU
