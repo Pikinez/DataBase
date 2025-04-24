@@ -1,6 +1,6 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.2.1D
+title D4R4N0X-V0.2.1B
 chcp 65001 >nul
 :MENU
 cls
@@ -30,10 +30,10 @@ echo                                                                    ██�
 
 
 echo.
-echo [1].{Clean roblox/exploits/bloxstrap/etc} - (Velocity, Solara) (OFFLINE)
+echo [1].{Clean roblox/exploits/bloxstrap/etc} - (Velocity, Solara)
 echo [2].{Fix Solara version Missmatch} 
 echo [3].{Downgrade Roblox Version} - (Bloxstrap)
-echo [4].{Download Bloxstrap} - (Fast and Safe) (OFFLINE)
+echo [4].{Download Bloxstrap} - (Fast and Safe) 
 echo [5].{Exploits online} - (PULSERY PROVIDED)
 echo.
 echo [6]. Exit {Autodelete this bat}
@@ -43,7 +43,7 @@ set /p choice=(1-5) SELECT:
 if "%choice%"=="1" goto CLEAR
 if "%choice%"=="2" goto FIXEXPL
 if "%choice%"=="3" goto DOWNGRADEROBLOX
-if "%choice%"=="4" goto OFFLINE
+if "%choice%"=="4" goto FIX
 if "%choice%"=="5" goto EXPLOITS
 if "%choice%"=="6" exit
 
@@ -192,6 +192,9 @@ cls
 echo /====================================================\
 echo  \\\...Clearing Potential Downgrades + Versions..\\\     /---5\15---\
 echo \====================================================/
+
+#powershell -Command "Start-Process 'https://clientsettingscdn.roblox.com/v2/client-version/WindowsPlayer' -Wait"
+
 attrib -h -s -r %localappdata%\Bloxstrap\Versions\* /s /d
 attrib -h -s -r %localappdata%\Roblox\Versions\* /s /d
 attrib -h -s -r %localappdata%\Fishstrap\Versions* /s /d
@@ -227,7 +230,7 @@ w32tm /resync /force
 
 
 echo /====================================================\
-echo          \\\...Cleaning Original Roblox...\\\             /---9\15---\
+echo          \\\...Cleaning TEMP...\\\                       /---9\15---\
 echo \====================================================/
 for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
     echo %%~nxf | find /i "Cookies" > NUL
@@ -235,6 +238,8 @@ for %%f in (%USERPROFILE%\AppData\LocalLow\Roblox\*.*) do (
         del /q "%%f"
     )
 )
+for /d %%p in ("%temp%\*.*") do rmdir "%%p" /s /q
+del /s /q "%temp%\*.*"
 cls
 
 echo /====================================================\  
@@ -275,28 +280,42 @@ echo /====================================================\
 echo    \\\... ...\\\      /---12\15---\
 echo \====================================================/
 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard" /v "Enabled" /t REG_DWORD /d 0 /f
+#powershell -Command "Start-Process 'https://github.com/VollRagm/NalFix/releases/download/1.0/NalFix.exe' -Wait"
 cls
 
 echo /====================================================\  
 echo    \\\... ...\\\      /---13\15---\
 echo \====================================================/
 
-cls
-
-echo /====================================================\  
-echo    \\\... ...\\\      /---14\15---\
-echo \====================================================/
+#powershell -Command "Start-Process 'https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe' -Wait"
+#powershell -Command "Start-Process 'https://download.visualstudio.microsoft.com/download/pr/5cc0a375-ebc5-4a27-8a76-aa43097a8949/ED1967C2AC27D806806D121601B526F84E497AE1B99ED139C0C4C6B50147DF4A/VC_redist.x86.exe' -Wait"
+#powershell -Command "Start-Process 'https://download.visualstudio.microsoft.com/download/pr/368cc6bf-087b-49f9-93e6-ab05b70a58e0/814E9DA5EC5E5D6A8FA701999D1FC3BADDF7F3ADC528E202590E9B1CB73E4A11/VC_redist.x64.exe' -Wait"
 
 cls
 
 echo /====================================================\  
-echo    \\\... ...\\\      /---15\15---\
+echo    \\\... EMPTY FUNCTION ...\\\      /---14\15---\
 echo \====================================================/
+
+
+
+cls
+
+echo /====================================================\  
+echo    \\\... JUST WAIT :( ...\\\      /---15\15---\
+echo \====================================================/
+
+sfc /scannow
+DISM /Online /Cleanup-Image /RestoreHealth
+mdsched.exe
+msconfig
 
 cls
 echo /====================================================\ 
 echo       \\\...Finished-d-d-d-d-d-d-d-d-d-d-d-d...\\\      
-echo              !!DO NOT SHARE PHOTOS THERE!!
 echo \====================================================/
 pause
 goto MENU
@@ -327,6 +346,17 @@ if exist %TEMP%\Solara.zip (
     echo      \\\...Error, Solara was not downloaded...\\\               
     echo \====================================================/
 )
+pause
+goto MENU
+
+:FIX3
+echo /====================================================\
+echo            \\\...Bloxstrap Downlaoding...\\\ 
+echo \====================================================/
+powershell -Command "Start-Process 'https://objects.githubusercontent.com/github-production-release-asset-2e65be/520583586/f5975dfa-97e1-489e-9f14-41f125402efc?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20241019%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241019T153845Z&X-Amz-Expires=300&X-Amz-Signature=b130eb5c62fb6149c3bf01b6bf0e4d0918290c370b0e450b6416f7b3ec0eac9e&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3DBloxstrap-v2.8.0.exe&response-content-type=application%2Foctet-stream' -Wait"
+echo /====================================================\
+echo            \\\...Process Finished!...\\\ 
+echo \====================================================/
 pause
 goto MENU
 
