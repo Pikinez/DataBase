@@ -1,10 +1,10 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.2.2B
+title D4R4N0X-V0.2.3A
 chcp 65001 >nul
 :MENU
 cls
-title D4R4N0X-V0.2.2B
+title D4R4N0X-V0.2.3A
 Color 0C & Mode con cols=87 lines=30
 echo.
 echo    ▄████████ ███    █▄     ▄███████▄    ▄███████▄  ▄██████▄     ▄████████     ███     
@@ -31,11 +31,11 @@ echo                                                                    ██�
 
 
 echo.
-echo [1].{Clean roblox/exploits/bloxstrap/etc} - (Velocity, Solara)
+echo [1].{Global Cleaning Misson} - (Velocity, Solara)
 echo [2].{Fix Solara version Missmatch} 
-echo [3].{HWid Ban Byppass} - (MultiRoblox)
-echo [4].{Download Bloxstrap} - (Fast and Safe) 
-echo [5].{Exploits online} - (PULSERY PROVIDED)
+echo [3].{Cookie Ban Bypass} - (Will fix Error 403)
+echo [4].{Download Bloxstrap} - (FastFlags) 
+echo [5].{}
 echo.
 echo [6]. Exit {Autodelete this bat}
 echo.
@@ -78,7 +78,7 @@ if errorlevel 1 (
 )
 
 echo /====================================================\
-echo                 \\\...EXPLOITS...\\\
+echo \\\...EXPLOITS...\\\
 echo \====================================================/
 
 %JQ_FILE% -r ".[] | \"Title: \(.title)\nVersion: \(.version)\nUpdated: \(.updatedDate)\nDetected: \(.detected)\nCertified: \(.pulseryCertified)\nCost: \(.cost // \"Free\")\nUpdate Status: \(.updateStatus)\nWebsite: \(.websitelink // \"N/A\")\nDiscord: \(.discordlink // \"N/A\")\nPlatform: \(.platform)\n====================================================\"" exploits.json
@@ -347,7 +347,7 @@ powershell -Command "Add-MpPreference -ExclusionPath \"$env:ProgramData\Solara\"
 cls
 
 echo /====================================================\  
-echo    \\\...Do you want to install NalFix?...\\\             /---12\15---\
+echo \\\...Do you want to install NalFix?...\\\                /---12\15---\
 echo \====================================================/
 title Waiting... 12/15
 echo.
