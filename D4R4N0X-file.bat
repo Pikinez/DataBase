@@ -1,10 +1,10 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.2.3A
+title D4R4N0X-V0.3.0G
 chcp 65001 >nul
 :MENU
 cls
-title D4R4N0X-V0.2.3A
+title D4R4N0X-V0.3.0B
 Color 0C & Mode con cols=87 lines=30
 echo.
 echo    ▄████████ ███    █▄     ▄███████▄    ▄███████▄  ▄██████▄     ▄████████     ███     
@@ -41,9 +41,9 @@ echo [6]. Exit {Autodelete this bat}
 echo.
 set /p choice=(1-5) SELECT: 
 
-if "%choice%"=="1" goto CLEAR
+if "%choice%"=="1" goto CLEARMISSION
 if "%choice%"=="2" goto FIXEXPL
-if "%choice%"=="3" goto DOWNGRADEROBLOX
+if "%choice%"=="3" goto BYPASSBAN
 if "%choice%"=="4" goto FIX
 if "%choice%"=="5" goto EXPLOITS
 if "%choice%"=="6" exit
@@ -92,8 +92,8 @@ echo FUCK YOU >:()
 pause
 goto MENU
 
-:DOWNGRADEROBLOX
-title Roblox Cleanup Utility
+:BYPASSBAN
+setlocal EnableDelayedExpansion
 mode con cols=60 lines=25
 color 0E
 cls
@@ -149,7 +149,7 @@ echo \====================================================/
 pause
 goto MENU
 
-:CLEAR
+:CLEARMISSION
 cls
 color 09 & Mode con cols=54 lines=27
 echo /====================================================\
@@ -168,7 +168,6 @@ if %errorlevel%==0 (
     goto MENU
 )
 
-:: Kill processes before checking
 for %%p in (RobloxPlayerBeta.exe Velocity.exe "Roblox Game Client.exe" Bloxstrap.exe Solara.exe) do (
     taskkill /IM %%p /F >nul 2>&1
     tasklist /FI "IMAGENAME eq %%p" 2>NUL | find /I "%%p" >NUL && (
@@ -182,15 +181,14 @@ for %%p in (RobloxPlayerBeta.exe Velocity.exe "Roblox Game Client.exe" Bloxstrap
     )
 )
 
+title Deleting Temp Files of Roblox                                                                                                                                                                    [1/15]
 echo /====================================================\
-echo \\\...Deleting Temp Files of Roblox...\\\                 /---1\15---\
+echo \\\...Deleting Roblox TEMP files...\\\                [1/15]                                                                
 echo \====================================================/
-title Deleting Temp Files of Roblox 1/15
 rd /s /q "%TEMP%\Roblox" >nul 2>&1
 rd /s /q "%TEMP%\Roblox*" >nul 2>&1
-cd /d "%LOCALAPPDATA%\Roblox"
-for /d %%D in (*) do (
-    if /i not "%%D"=="LocalStorage" (
+for /d %%D in ("%LOCALAPPDATA%\Roblox\*") do (
+    if /i not "%%~nxD"=="LocalStorage" (
         rd /s /q "%%D" >nul 2>&1
     )
 )
@@ -201,153 +199,129 @@ taskkill /f /im explorer.exe >nul 2>&1
 start explorer.exe
 cls
 
-title Deleting Blox/fish<strap> Logs 2/15
+:: ========== STEP 2 ==========
+title Deleting Blox/Fishstrap Logs                                                                                                                                                                     [2/15]
 echo /====================================================\
-echo \\\...Deleting Blox/fish<strap> Logs...\\\                /---2\15---\
+echo \\\...Deleting Bloxstrap and Fishstrap logs...\\\     [2/15]    
 echo \====================================================/
-rd /s /q %localappdata%\Bloxstrap\Logs*
-rd /s /q %localappdata%\Fishstrap\Logs*
+rd /s /q "%LOCALAPPDATA%\Bloxstrap\Logs" >nul 2>&1
+rd /s /q "%LOCALAPPDATA%\Fishstrap\Logs" >nul 2>&1
 cls
 
+title Deleting Solara from Registry                                                                                                                                                                    [3/15]
 echo /====================================================\
-echo \\\...Deleting Solara from Register ...\\\                /---3\15---\ 
+echo \\\...Removing Solara registry entries...\\\          [3/15]    
 echo \====================================================/
-title Deleting Solara from Register 3/15
-setlocal enabledelayedexpansion
-for /f "tokens=*" %%A in ('reg query "HKLM\SYSTEM\ControlSet001\Services\bam\State\UserSettings" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do (
-    reg delete "%%A" /f >nul 2>&1
+for /f "tokens=*" %%A in ('reg query "HKLM\SYSTEM\ControlSet001\Services\bam\State\UserSettings" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do reg delete "%%A" /f >nul 2>&1
+for /f "tokens=*" %%B in ('reg query "HKLM\SOFTWARE\Microsoft\Tracing" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do reg delete "%%B" /f >nul 2>&1
+cls
+
+title Deleting Roblox Local Data                                                                                                                                                                       [4/15]
+echo /====================================================\
+echo \\\...Cleaning AppData\Local\Roblox...\\\             [4/15]    
+echo \====================================================/
+for /d %%i in ("%LOCALAPPDATA%\Roblox\*") do (
+    if /i not "%%~nxi"=="LocalStorage" rmdir /s /q "%%i"
 )
-for /f "tokens=*" %%B in ('reg query "HKLM\SOFTWARE\Microsoft\Tracing" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do (
-    reg delete "%%B" /f >nul 2>&1
+for %%f in ("%LOCALAPPDATA%\Roblox\*.*") do (
+    echo %%~nxf | find /i "Cookies" >nul || del /q "%%f"
 )
-
 cls
 
-
+title Clearing Downgrades and Versions                                                                                                                                                                 [5/15]
 echo /====================================================\
-echo \\\...Deleting Roblox from AppData\Local...\\\            /---4\15---\
+echo \\\...Removing downgrade traces and old versions...\\\[5/15]   
 echo \====================================================/
-title Deleting Roblox from AppData\Local 4/15
-cd /d "%localappdata%\Roblox"
-for /d %%i in (*) do ( if /i not "%%i"=="LocalStorage" ( rmdir /s /q "%%i" ) )
-for %%f in (*.*) do (
-    echo %%f | find /i "Cookies" > nul
-    if errorlevel 1 ( del /q "%%f" )
-)
-
+attrib -h -s -r %localappdata%\*\Versions\* /s /d >nul 2>&1
+rd /s /q %localappdata%\Fishstrap\Versions\ >nul 2>&1
+rd /s /q %localappdata%\Bloxstrap\Versions\ >nul 2>&1
+rd /s /q %localappdata%\Roblox\Versions\ >nul 2>&1
 cls
 
-
+title Cleaning Roblox Program Files                                                                                                                                                                    [6/15]
 echo /====================================================\
-echo  \\\...Clearing Potential Downgrades + Versions..\\\      /---5\15---\
+echo \\\...Deleting log and storage folders...\\\          [6/15]    
 echo \====================================================/
-title Clearing Potential Downgrades + Versions 5/15
-
-#powershell -Command "Start-Process 'https://clientsettingscdn.roblox.com/v2/client-version/WindowsPlayer' -Wait"
-
-attrib -h -s -r %localappdata%\Bloxstrap\Versions\* /s /d
-attrib -h -s -r %localappdata%\Roblox\Versions\* /s /d
-attrib -h -s -r %localappdata%\Fishstrap\Versions* /s /d
-
-rd /s /q %localappdata%\Fishstrap\Versions\
-rd /s /q %localappdata%\Bloxstrap\Versions\
-rd /s /q %localappdata%\Roblox\Versions\
+rd /s /q %localappdata%\Roblox\LocalStorage\* >nul 2>&1
+rd /s /q %localappdata%\Roblox\logs\* >nul 2>&1
 cls
 
+title Deleting Roblox Registry Entries                                                                                                                                                                 [7/15]
 echo /====================================================\
-echo \\\...Cleaning Roblox Files from Program Files..\\\       /---6\15---\
+echo \\\...Cleaning up Roblox from registry...\\\          [7/15]   
 echo \====================================================/
-title Cleaning Roblox Files from Program Files 6/15
-rd /s /q %localappdata%\\Roblox\\LocalStorage\\*
-rd /s /q %localappdata%\\Roblox\\logs\\*
+reg delete "HKEY_CURRENT_USER\Software\Roblox" /f >nul 2>&1
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f >nul 2>&1
 cls
 
+title Syncing Time                                                                                                                                                                                     [8/15]
 echo /====================================================\
-echo \\...Deleting Roblox in Registry...\\\                    /---7\15---\
+echo \\\...Forcing time sync...\\\                         [8/15]  
 echo \====================================================/
-title Deleting Roblox in Registry 7/15
-reg delete "HKEY_CURRENT_USER\Software\Roblox" /f > NUL 2>&1
-reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f > NUL 2>&1
-cls
-
-echo /====================================================\
-echo \\\Forcing time sync......\\\                             /---8\15---\ 
-echo \====================================================/
-title Forcing time sync 8/15
 net stop w32time >nul 2>&1
 w32tm /unregister >nul 2>&1
-w32tm /register >nul 2>&1.
+w32tm /register >nul 2>&1
 net start w32time >nul 2>&1
 w32tm /config /manualpeerlist:"time.windows.com" /syncfromflags:manual /reliable:yes /update >nul 2>&1
-w32tm /resync /force
-w32tm /query /status
+w32tm /resync /force >nul 2>&1
 cls
 
+title Cleaning TEMP Files                                                                                                                                                                              [9/15]
 echo /====================================================\
-echo \\\...Cleaning TEMP...\\\                                 /---9\15---\
+echo \\\...Cleaning TEMP folder...\\\                      [9/15]       
 echo \====================================================/
-title Cleaning TEMP 9/15
 for %%f in ("%USERPROFILE%\AppData\LocalLow\Roblox\*") do (
-    echo %%~nxf | find /i "Cookies" > NUL
-    if errorlevel 1 (
-        del /q "%%f" 2>nul
-    )
+    echo %%~nxf | find /i "Cookies" >nul || del /q "%%f" 2>nul
 )
-for /d %%p in ("%temp%\*") do (
-    rmdir "%%p" /s /q 2>nul
-)
+for /d %%p in ("%temp%\*") do rmdir "%%p" /s /q 2>nul
 del /s /q "%temp%\*" 2>nul
+cls
 
-cls
-echo /====================================================\  
-echo \\...Resetting Network and DNS...\\\                      /---10\15---\
+title Resetting Network & DNS                                                                                                                                                                          [10/15]
+echo /====================================================\
+echo \\\...Resetting network components...\\\              [10/15]      
 echo \====================================================/
-title Resetting Network and DNS 10/15
-net stop dnscache
-net stop nlasvc
+net stop dnscache >nul 2>&1
+net stop nlasvc >nul 2>&1
+netsh int ip reset >nul
+netsh int ipv6 reset >nul
+netsh winsock reset >nul
+netsh advfirewall reset >nul
+ipconfig /flushdns >nul
+ipconfig /registerdns >nul
+start /b ipconfig /release >nul
+start /b ipconfig /renew >nul
+net start Dhcp >nul
+net start dnscache >nul
+net start nlasvc >nul
 cls
-echo /====================================================\ 
-echo \\\...Resetting network components...\\\                  /---10\15---\
+
+title Final Time Sync  
+echo /====================================================\                                                                                                                                            [10/15]
+echo \\\...Syncing Time again...\\\
 echo \====================================================/
-title Resetting network components 10/15
-netsh int ip reset c:\resetlog.txt
-netsh int ipv6 reset c:\resetlog.txt
-netsh int ip reset
-netsh winsock reset
-netsh advfirewall reset
+sc config w32time start= auto >nul
+net start w32time >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpClient" /v Enabled /t REG_DWORD /d 1 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpClient" /v SpecialPollInterval /t REG_DWORD /d 3600 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpClient" /v NtpServer /t REG_SZ /d time.windows.com,0x9 /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" /v Type /t REG_SZ /d NTP /f >nul
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\W32Time\Config" /v AnnounceFlags /t REG_DWORD /d 5 /f >nul
+w32tm /config /update >nul
+w32tm /resync >nul
 cls
-echo /====================================================\ 
-echo \\\...Flushing DNS...\\\                                  /---10\15---\
+
+title Whitelisting in Defender                                                                                                                                                                         [11/15]
+echo /====================================================\
+echo \\\...Adding exclusions to Windows Defender...\\\     [11/15] 
 echo \====================================================/
-title Flushing DNS 10/15
-ipconfig /flushdns
-ipconfig /registerdns
-cls
-echo /====================================================\ 
-echo \\\...Renewing IP address...\\\                           /---10\15---\
-echo \====================================================/
-title Renewing IP address 10/15
-start /b ipconfig /release 
-start /b ipconfig /renew 
-cls
-echo /====================================================\ 
-echo \\\...Restarting network services...\\\                   /---10\15---\
-echo \====================================================/
-title Restarting network services 10/15
-net start Dhcp 
-net start dnscache
-net start nlasvc 
-cls
-echo /====================================================\  
-echo \\...Adding to Windows WhiteList...\\\                    /---11\15---\
-echo \====================================================/
-title Adding to Windows WhiteList 11/15
 powershell -Command "Add-MpPreference -ExclusionPath \"$env:USERPROFILE\AppData\Local\Temp\Solara.Dir\""
 powershell -Command "Add-MpPreference -ExclusionPath \"$env:ProgramData\Solara\""
 cls
 
+title Asking for NalFix                                                                                                                                                                                [12/15] 
 echo /====================================================\  
-echo \\\...Do you want to install NalFix?...\\\                /---12\15---\
+echo \\\...Do you want to install NalFix?...\\\            [12/15]
 echo \====================================================/
 title Waiting... 12/15
 echo.
@@ -361,12 +335,15 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialG
 
 set /p choice=(1-2) SELECT: 
 if "%choice%"=="1" (
-    title Skipped 12/15
+    title Skipped                                                                                                                                                                                      [12/15]
     echo 12:Skipped
 )
 if "%choice%"=="2" (
     cls
-    title Installing NalFix 12/15
+    title Installing NalFix                                                                                                                                                                           [12/15]
+    echo /====================================================\  
+    echo \\\...Installing NalFix...\\\                         [13/15]
+    echo \====================================================/                                                                                                                                        
     setlocal enabledelayedexpansion
     set "TMPDIR=%TEMP%\Installers"
     mkdir "%TMPDIR%" >nul 2>&1
@@ -376,9 +353,9 @@ if "%choice%"=="2" (
 cls
 
 echo /====================================================\  
-echo \\\...Download Redist Extinctions?...\\\                  /---13\15---\
+echo \\\...Download Redist Extinctions?...\\\              [13/15]
 echo \====================================================/
-title Waiting 13/15
+title Waiting                                                                                                                                                                                          [13/15]
 echo.
 echo [1]. Skip
 echo [2]. Yes (dxWebsetup.exe, VC_redist.x86.exe, VC_redist.x64.exe)
@@ -388,28 +365,27 @@ set /p choice=(1-2) SELECT:
 if "%choice%"=="1" (
     title Skipped 13/15
     echo 13:Skipped
-)
-if "%choice%"=="2" (
-    cls
-    title Downloading Redist Extinctions 13/15
-    setlocal enabledelayedexpansion
+) else if "%choice%"=="2" (
     set "TMPDIR=%TEMP%\Installers"
     mkdir "%TMPDIR%" >nul 2>&1
-    powershell -Command "(New-Object Net.WebClient).DownloadFile('https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe', '%TMPDIR%\dxwebsetup.exe')"
-    start /wait "" "%TMPDIR%\dxwebsetup.exe"
-    powershell -Command "(New-Object Net.WebClient).DownloadFile('https://download.visualstudio.microsoft.com/download/pr/5cc0a375-ebc5-4a27-8a76-aa43097a8949/ED1967C2AC27D806806D121601B526F84E497AE1B99ED139C0C4C6B50147DF4A/VC_redist.x86.exe', '%TMPDIR%\vc_x86.exe')"
-    start /wait "" "%TMPDIR%\vc_x86.exe"
-    powershell -Command "(New-Object Net.WebClient).DownloadFile('https://download.visualstudio.microsoft.com/download/pr/368cc6bf-087b-49f9-93e6-ab05b70a58e0/814E9DA5EC5E5D6A8FA701999D1FC3BADDF7F3ADC528E202590E9B1CB73E4A11/VC_redist.x64.exe', '%TMPDIR%\vc_x64.exe')"
-    start /wait "" "%TMPDIR%\vc_x64.exe"
+    set "DOWNLOAD_URL=https://github.com/riicess/Swift-TroubleShooting-Guide/raw/refs/heads/main/SwiftDepsInstall.exe"
+    set "DEST_FILE=%TMPDIR%\SwiftDepsInstall.exe"
+    powershell -Command "(New-Object Net.WebClient).DownloadFile('%DOWNLOAD_URL%', '%DEST_FILE%')"
+    if exist "%DEST_FILE%" (
+        start /wait "" "%DEST_FILE%"
+    ) else (
+        cls
+        echo /====================================================\
+        echo \\\...Error: Download failed. File not found...\\\    [13/15]
+        echo \====================================================/
+        title Error: Download failed. File not found                                                                                                                                                   [13/15]
+    )
 )
-cls
-
-cls
 
 echo /====================================================\  
-echo \\\... Clearing MiuCache ...\\\                          /---14\15---\
+echo \\\... Clearing MiuCache ...\\\                       [14\15]
 echo \====================================================/
-title Clearing MiuCache 14/15
+title Clearing MiuCache                                                                                                                                                                                [14/15]
 setlocal enabledelayedexpansion
 for /f "tokens=2 delims=\" %%A in ('whoami') do set USERNAME=%%A
 for /f "tokens=*" %%S in ('wmic useraccount where name^="!USERNAME!" get sid ^| findstr /R "S-1-5-21"') do set SID=%%S
@@ -432,16 +408,12 @@ reg delete %KEY% /f >nul
 reg import "%temp%\clean_muicache.reg"
 del "%temp%\muicache.reg" >nul 2>&1
 del "%temp%\clean_muicache.reg" >nul 2>&1
-
-pause
-
-
-
 cls
 
 echo /====================================================\  
-echo \\\... Want to scan disk? ...\\\                          /---15\15---\
+echo \\\... Want to scan disk? ...\\\                      [15\15]
 echo \====================================================/
+title Waiting                                                                                                                                                                                          [15/15]                                                                                                                                                                                        [15/15]
 echo.
 echo [1]. Skip
 echo [2]. Do it
@@ -474,21 +446,26 @@ pause
 GOTO MENU
 
 :FIXEXPL
-cls
 Color 0E & Mode con cols=54 lines=27
 echo /====================================================\
 echo \\\...Downloading Solara from github...\\\               
 echo \====================================================/
 powershell -Command "Invoke-WebRequest -Uri https://github.com/Pikinez/ssl/raw/refs/heads/main/Solara.zip -OutFile %TEMP%\Solara.zip"
+
 if exist %TEMP%\Solara.zip (
-    cls
     color 0E
     echo /====================================================\
     echo \\\...Unpacking Solara...\\\               
     echo \====================================================/
-    powershell -Command "Expand-Archive -Path %TEMP%\Solara.zip -DestinationPath %programdata% -Force"
+    powershell -Command "Expand-Archive -Path '%TEMP%\Solara.zip' -DestinationPath '%programdata%' -Force"
     del %TEMP%\Solara.zip
-    cls
+
+    :: Создание ярлыка на рабочем столе
+    set "SolaraPath=%ProgramData%\Solara\Solara.exe"
+    set "ShortcutPath=%USERPROFILE%\Desktop\Solara.lnk"
+
+    powershell -Command "$s=(New-Object -COM WScript.Shell).CreateShortcut('%ShortcutPath%'); $s.TargetPath='%SolaraPath%'; $s.WorkingDirectory='%~dp0'; $s.Save()"
+
     echo /====================================================\
     echo \\\...Solara was downloaded and installed...\\\               
     echo \====================================================/
