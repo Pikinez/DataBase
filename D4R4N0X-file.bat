@@ -1,11 +1,11 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.3.0G
+title D4R4N0X-V0.3.5A(CUTTED)
 chcp 65001 >nul
 :MENU
 cls
-title D4R4N0X-V0.3.0B
-Color 0C & Mode con cols=87 lines=30
+title D4R4N0X-V0.3.5A(CUTTED) -- SUNRISE[27/06/2025]
+Color 0D & Mode con cols=87 lines=30
 echo.
 echo    ▄████████ ███    █▄     ▄███████▄    ▄███████▄  ▄██████▄     ▄████████     ███     
 echo   ███    ███ ███    ███   ███    ███   ███    ███ ███    ███   ███    ███ ▀█████████▄ 
@@ -32,23 +32,28 @@ echo                                                                    ██�
 
 echo.
 echo [1].{Global Cleaning Misson} - (Velocity, Solara)
-echo [2].{Fix Solara version Missmatch} 
+echo [2].{Fix Exploits} - (Solara, Velocity)
 echo [3].{Cookie Ban Bypass} - (Will fix Error 403)
 echo [4].{Download Bloxstrap} - (FastFlags) 
-echo [5].{}
+echo [5].{Online Exploits} - (API: WhatExpsAre.Online)
 echo.
 echo [6]. Exit {Autodelete this bat}
 echo.
 set /p choice=(1-5) SELECT: 
 
 if "%choice%"=="1" goto CLEARMISSION
-if "%choice%"=="2" goto FIXEXPL
+if "%choice%"=="2" goto FIXSOLARA
 if "%choice%"=="3" goto BYPASSBAN
-if "%choice%"=="4" goto FIX
+if "%choice%"=="4" goto DOWNLOADBLOXSTRAP
 if "%choice%"=="5" goto EXPLOITS
 if "%choice%"=="6" exit
-
 goto MENU
+
+
+
+
+
+
 
 :EXPLOITS
 color 0C
@@ -69,28 +74,28 @@ if not exist "%JQ_FILE%" (
         exit /b
     )
 )
-
 curl -s -X GET "https://api.pulsery.live/api/exploits" -H "Content-Type: application/json" > exploits.json
 if errorlevel 1 (
     pause
     echo ERR API
     exit /b
 )
-
 echo /====================================================\
 echo \\\...EXPLOITS...\\\
 echo \====================================================/
-
 %JQ_FILE% -r ".[] | \"Title: \(.title)\nVersion: \(.version)\nUpdated: \(.updatedDate)\nDetected: \(.detected)\nCertified: \(.pulseryCertified)\nCost: \(.cost // \"Free\")\nUpdate Status: \(.updateStatus)\nWebsite: \(.websitelink // \"N/A\")\nDiscord: \(.discordlink // \"N/A\")\nPlatform: \(.platform)\n====================================================\"" exploits.json
 pause
 goto MENU
 
-:OFFLINE
-cls
-echo.
-echo FUCK YOU >:()
-pause
-goto MENU
+
+
+
+
+
+
+
+
+
 
 :BYPASSBAN
 setlocal EnableDelayedExpansion
@@ -149,13 +154,21 @@ echo \====================================================/
 pause
 goto MENU
 
+
+
+
+
+
+
+
 :CLEARMISSION
 cls
 color 09 & Mode con cols=54 lines=27
 echo /====================================================\
-echo \\\.....S.T.A.R.T.E.D...\\\        
+echo \\\...S.T.A.R.T.E.D...\\\CHECKING PROCESSES...\\\        
 echo \====================================================/
 echo.
+
 
 powershell -Command "& {(Get-MpComputerStatus).RealTimeProtectionEnabled}" | findstr "True" >nul
 if %errorlevel%==0 (
@@ -167,6 +180,7 @@ if %errorlevel%==0 (
     pause
     goto MENU
 )
+
 
 for %%p in (RobloxPlayerBeta.exe Velocity.exe "Roblox Game Client.exe" Bloxstrap.exe Solara.exe) do (
     taskkill /IM %%p /F >nul 2>&1
@@ -180,10 +194,12 @@ for %%p in (RobloxPlayerBeta.exe Velocity.exe "Roblox Game Client.exe" Bloxstrap
         goto MENU
     )
 )
+cls
+
 
 title Deleting Temp Files of Roblox                                                                                                                                                                    [1/15]
 echo /====================================================\
-echo \\\...Deleting Roblox TEMP files...\\\                [1/15]                                                                
+echo \\\...Deleting Roblox TEMP files...\\\               [1/15]                                                                
 echo \====================================================/
 rd /s /q "%TEMP%\Roblox" >nul 2>&1
 rd /s /q "%TEMP%\Roblox*" >nul 2>&1
@@ -199,26 +215,32 @@ taskkill /f /im explorer.exe >nul 2>&1
 start explorer.exe
 cls
 
+
+
 :: ========== STEP 2 ==========
-title Deleting Blox/Fishstrap Logs                                                                                                                                                                     [2/15]
+title Deleting Blox/Fishstrap Logs                   [2/15]
 echo /====================================================\
-echo \\\...Deleting Bloxstrap and Fishstrap logs...\\\     [2/15]    
+echo \\\...Deleting Bloxstrap and Fishstrap logs...\\\    [2/15]    
 echo \====================================================/
 rd /s /q "%LOCALAPPDATA%\Bloxstrap\Logs" >nul 2>&1
 rd /s /q "%LOCALAPPDATA%\Fishstrap\Logs" >nul 2>&1
 cls
 
-title Deleting Solara from Registry                                                                                                                                                                    [3/15]
+
+
+title Deleting Solara from Registry                  [3/15]
 echo /====================================================\
-echo \\\...Removing Solara registry entries...\\\          [3/15]    
+echo \\\...Removing Solara registry entries...\\\         [3/15]    
 echo \====================================================/
 for /f "tokens=*" %%A in ('reg query "HKLM\SYSTEM\ControlSet001\Services\bam\State\UserSettings" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do reg delete "%%A" /f >nul 2>&1
 for /f "tokens=*" %%B in ('reg query "HKLM\SOFTWARE\Microsoft\Tracing" /s /f "Solara" 2^>nul ^| findstr "HKEY"') do reg delete "%%B" /f >nul 2>&1
 cls
 
-title Deleting Roblox Local Data                                                                                                                                                                       [4/15]
+
+
+title Deleting Roblox Local Data                    [4/15]
 echo /====================================================\
-echo \\\...Cleaning AppData\Local\Roblox...\\\             [4/15]    
+echo \\\...Cleaning AppData\Local\Roblox...\\\            [4/15]    
 echo \====================================================/
 for /d %%i in ("%LOCALAPPDATA%\Roblox\*") do (
     if /i not "%%~nxi"=="LocalStorage" rmdir /s /q "%%i"
@@ -228,9 +250,11 @@ for %%f in ("%LOCALAPPDATA%\Roblox\*.*") do (
 )
 cls
 
-title Clearing Downgrades and Versions                                                                                                                                                                 [5/15]
+
+
+title Clearing Downgrades and Versions               [5/15]
 echo /====================================================\
-echo \\\...Removing downgrade traces and old versions...\\\[5/15]   
+echo \\\...Removing downgrade traces and old version...\\\[5/15]   
 echo \====================================================/
 attrib -h -s -r %localappdata%\*\Versions\* /s /d >nul 2>&1
 rd /s /q %localappdata%\Fishstrap\Versions\ >nul 2>&1
@@ -238,37 +262,44 @@ rd /s /q %localappdata%\Bloxstrap\Versions\ >nul 2>&1
 rd /s /q %localappdata%\Roblox\Versions\ >nul 2>&1
 cls
 
-title Cleaning Roblox Program Files                                                                                                                                                                    [6/15]
+
+
+title Cleaning Roblox Program Files                 [6/15]
 echo /====================================================\
-echo \\\...Deleting log and storage folders...\\\          [6/15]    
+echo \\\...Deleting log and storage folders...\\\         [6/15]    
 echo \====================================================/
 rd /s /q %localappdata%\Roblox\LocalStorage\* >nul 2>&1
 rd /s /q %localappdata%\Roblox\logs\* >nul 2>&1
 cls
 
-title Deleting Roblox Registry Entries                                                                                                                                                                 [7/15]
+
+
+title Deleting Roblox Registry Entries               [7/15]
 echo /====================================================\
-echo \\\...Cleaning up Roblox from registry...\\\          [7/15]   
+echo \\\...Cleaning up Roblox from registry...\\\         [7/15]   
 echo \====================================================/
 reg delete "HKEY_CURRENT_USER\Software\Roblox" /f >nul 2>&1
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Roblox" /f >nul 2>&1
 cls
 
-title Syncing Time                                                                                                                                                                                     [8/15]
+
+
+title Syncing Time                                   [8/15]
 echo /====================================================\
-echo \\\...Forcing time sync...\\\                         [8/15]  
+echo \\\...Forcing time sync...\\\                        [8/15]  
 echo \====================================================/
 net stop w32time >nul 2>&1
 w32tm /unregister >nul 2>&1
 w32tm /register >nul 2>&1
 net start w32time >nul 2>&1
-w32tm /config /manualpeerlist:"time.windows.com" /syncfromflags:manual /reliable:yes /update >nul 2>&1
 w32tm /resync /force >nul 2>&1
 cls
 
-title Cleaning TEMP Files                                                                                                                                                                              [9/15]
+
+
+title Cleaning TEMP Files                            [9/15]
 echo /====================================================\
-echo \\\...Cleaning TEMP folder...\\\                      [9/15]       
+echo \\\...Cleaning TEMP folder...\\\                     [9/15]       
 echo \====================================================/
 for %%f in ("%USERPROFILE%\AppData\LocalLow\Roblox\*") do (
     echo %%~nxf | find /i "Cookies" >nul || del /q "%%f" 2>nul
@@ -277,9 +308,11 @@ for /d %%p in ("%temp%\*") do rmdir "%%p" /s /q 2>nul
 del /s /q "%temp%\*" 2>nul
 cls
 
-title Resetting Network & DNS                                                                                                                                                                          [10/15]
+
+
+title Resetting Network & DNS                       [10/15]
 echo /====================================================\
-echo \\\...Resetting network components...\\\              [10/15]      
+echo \\\...Resetting network components...\\\             [10/15]      
 echo \====================================================/
 net stop dnscache >nul 2>&1
 net stop nlasvc >nul 2>&1
@@ -296,9 +329,11 @@ net start dnscache >nul
 net start nlasvc >nul
 cls
 
-title Final Time Sync  
+
+
+title Final Time Sync                               [10/15]
 echo /====================================================\                                                                                                                                            [10/15]
-echo \\\...Syncing Time again...\\\
+echo \\\...Syncing Time again...\\\                       [10/15] 
 echo \====================================================/
 sc config w32time start= auto >nul
 net start w32time >nul
@@ -311,17 +346,21 @@ w32tm /config /update >nul
 w32tm /resync >nul
 cls
 
-title Whitelisting in Defender                                                                                                                                                                         [11/15]
+
+
+title Whitelisting in Defender                      [11/15]
 echo /====================================================\
-echo \\\...Adding exclusions to Windows Defender...\\\     [11/15] 
+echo \\\...Adding exclusions to Windows Defender...\\\    [11/15] 
 echo \====================================================/
 powershell -Command "Add-MpPreference -ExclusionPath \"$env:USERPROFILE\AppData\Local\Temp\Solara.Dir\""
 powershell -Command "Add-MpPreference -ExclusionPath \"$env:ProgramData\Solara\""
 cls
 
-title Asking for NalFix                                                                                                                                                                                [12/15] 
+
+
+title Asking for NalFix                             [12/15] 
 echo /====================================================\  
-echo \\\...Do you want to install NalFix?...\\\            [12/15]
+echo \\\...Do you want to install NalFix?...\\\           [12/15]
 echo \====================================================/
 title Waiting... 12/15
 echo.
@@ -340,9 +379,9 @@ if "%choice%"=="1" (
 )
 if "%choice%"=="2" (
     cls
-    title Installing NalFix                                                                                                                                                                           [12/15]
+    title Installing NalFix                             [12/15]
     echo /====================================================\  
-    echo \\\...Installing NalFix...\\\                         [13/15]
+    echo \\\...Installing NalFix...\\\                        [13/15]
     echo \====================================================/                                                                                                                                        
     setlocal enabledelayedexpansion
     set "TMPDIR=%TEMP%\Installers"
@@ -352,10 +391,12 @@ if "%choice%"=="2" (
 )
 cls
 
+
+
 echo /====================================================\  
-echo \\\...Download Redist Extinctions?...\\\              [13/15]
+echo \\\...Download Redist Extinctions?...\\\             [13/15]
 echo \====================================================/
-title Waiting                                                                                                                                                                                          [13/15]
+title Waiting                                       [13/15]
 echo.
 echo [1]. Skip
 echo [2]. Yes (dxWebsetup.exe, VC_redist.x86.exe, VC_redist.x64.exe)
@@ -376,16 +417,20 @@ if "%choice%"=="1" (
     ) else (
         cls
         echo /====================================================\
-        echo \\\...Error: Download failed. File not found...\\\    [13/15]
+        echo \\\...Error: Download failed. File not found...\\\   [13/15]
         echo \====================================================/
         title Error: Download failed. File not found                                                                                                                                                   [13/15]
     )
 )
 
+cls
+
+
+
 echo /====================================================\  
-echo \\\... Clearing MiuCache ...\\\                       [14\15]
+echo \\\... Clearing MiuCache ...\\\                      [14\15]
 echo \====================================================/
-title Clearing MiuCache                                                                                                                                                                                [14/15]
+title Clearing MiuCache                             [14/15]
 setlocal enabledelayedexpansion
 for /f "tokens=2 delims=\" %%A in ('whoami') do set USERNAME=%%A
 for /f "tokens=*" %%S in ('wmic useraccount where name^="!USERNAME!" get sid ^| findstr /R "S-1-5-21"') do set SID=%%S
@@ -410,10 +455,12 @@ del "%temp%\muicache.reg" >nul 2>&1
 del "%temp%\clean_muicache.reg" >nul 2>&1
 cls
 
+
+
 echo /====================================================\  
-echo \\\... Want to scan disk? ...\\\                      [15\15]
+echo \\\... Want to scan disk? ...\\\                     [15\15]
 echo \====================================================/
-title Waiting                                                                                                                                                                                          [15/15]                                                                                                                                                                                        [15/15]
+title Waiting                                       [15/15]                                                                                                                                                                                        [15/15]
 echo.
 echo [1]. Skip
 echo [2]. Do it
@@ -427,7 +474,7 @@ if "%choice%"=="1" (
 
 if "%choice%"=="2" (
     cls
-    title Running health checks 15/15
+    title Running health checks                     [15/15]
     echo Running health checks...
     sfc /scannow
     DISM /Online /Cleanup-Image /RestoreHealth
@@ -437,7 +484,7 @@ if "%choice%"=="2" (
 
 
 cls
-color 0A
+color 0A & Mode con cols=54 lines=6
 title Global Mission Cleaning Finished
 echo /====================================================\ 
 echo \\\...Global Mission Cleaning Finished\\\      
@@ -445,40 +492,76 @@ echo \====================================================/
 pause
 GOTO MENU
 
-:FIXEXPL
-Color 0E & Mode con cols=54 lines=27
-echo /====================================================\
-echo \\\...Downloading Solara from github...\\\               
-echo \====================================================/
-powershell -Command "Invoke-WebRequest -Uri https://github.com/Pikinez/ssl/raw/refs/heads/main/Solara.zip -OutFile %TEMP%\Solara.zip"
 
-if exist %TEMP%\Solara.zip (
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:FIXSOLARA
+Color 0E & Mode con cols=54 lines=27
+chcp 65001 >nul
+echo /====================================================\
+echo \\\...Downloading Solara from github...\\\
+echo \====================================================/
+powershell -Command "Invoke-WebRequest -Uri https://github.com/Pikinez/ssl/raw/refs/heads/main/Solara.zip -OutFile '%TEMP%\Solara.zip'"
+cls
+if exist "%TEMP%\Solara.zip" (
     color 0E
     echo /====================================================\
-    echo \\\...Unpacking Solara...\\\               
+    echo \\\...Unpacking Solara...\\\
     echo \====================================================/
-    powershell -Command "Expand-Archive -Path '%TEMP%\Solara.zip' -DestinationPath '%programdata%' -Force"
-    del %TEMP%\Solara.zip
+    powershell -Command "Expand-Archive -Path '%TEMP%\Solara.zip' -DestinationPath '%ProgramData%' -Force"
+    del "%TEMP%\Solara.zip"
+    cls
+    if not exist "%ProgramData%\Solara\Solara.exe" (
+        color 0C
+        echo /====================================================\
+        echo \\\...Error: Solara.exe not found in %ProgramData%\Solara...\\\
+        echo \====================================================/
+        pause
+        exit /b 1
+    )
 
-    :: Создание ярлыка на рабочем столе
-    set "SolaraPath=%ProgramData%\Solara\Solara.exe"
-    set "ShortcutPath=%USERPROFILE%\Desktop\Solara.lnk"
+    powershell -Command "$s = (New-Object -ComObject WScript.Shell).CreateShortcut(\"$env:USERPROFILE\Desktop\Solara.lnk\"); $s.TargetPath = 'C:\ProgramData\Solara\Solara.exe'; $s.Save()"
 
-    powershell -Command "$s=(New-Object -COM WScript.Shell).CreateShortcut('%ShortcutPath%'); $s.TargetPath='%SolaraPath%'; $s.WorkingDirectory='%~dp0'; $s.Save()"
-
+    color 0A
     echo /====================================================\
-    echo \\\...Solara was downloaded and installed...\\\               
+    echo \\\...Solara was downloaded and added shortcut...\\\
     echo \====================================================/
 ) else (
     color 0C
     echo /====================================================\
-    echo \\\...Error, Solara was not downloaded...\\\               
+    echo \\\...Error: Solara was not downloaded...\\\
     echo \====================================================/
 )
-pause
-goto MENU
 
-:FIX3
+pause
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:DOWNLOADBLOXSTRAP
+cls
 echo /====================================================\
 echo \\\...Bloxstrap Downlaoding...\\\ 
 echo \====================================================/
@@ -489,3 +572,43 @@ echo \====================================================/
 pause
 goto MENU
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@echo off
+:EXP_ASK
+Color 0E
+Mode con cols=54 lines=27
+title Waiting                                      [??/??]
+echo /====================================================\  
+echo \\\Launched\\\...Which exploit you want download?..\\\
+echo \====================================================/  
+set /p choice=(1-2) SELECT: 
+if "%choice%"=="1" (
+    title Preparing///Preparing [12/15]
+    goto FIXSOLARA
+)
+if "%choice%"=="2" (
+    cls
+    goto EXP_ASK
+)
+if "%choice%"=="3" (
+    cls
+    goto MENU
+)
+cls
+echo Invalid option selected.
+timeout /t 2 >nul
+goto EXP_ASK
