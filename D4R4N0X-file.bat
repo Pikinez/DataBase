@@ -1,10 +1,10 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.3.5A(CUTTED)
+title D4R4N0X-V0.4SS+
 chcp 65001 >nul
 :MENU
 cls
-title D4R4N0X-V0.3.5A(CUTTED) -- SUNRISE[27/06/2025]
+title D4R4N0X-V0.4SS+ -- SUNRISE[06/07/2025]
 Color 0D & Mode con cols=87 lines=30
 echo.
 echo    ▄████████ ███    █▄     ▄███████▄    ▄███████▄  ▄██████▄     ▄████████     ███     
@@ -288,10 +288,8 @@ title Syncing Time                                   [8/15]
 echo /====================================================\
 echo \\\...Forcing time sync...\\\                        [8/15]  
 echo \====================================================/
-net stop w32time >nul 2>&1
 w32tm /unregister >nul 2>&1
 w32tm /register >nul 2>&1
-net start w32time >nul 2>&1
 w32tm /resync /force >nul 2>&1
 cls
 
@@ -544,15 +542,8 @@ if exist "%TEMP%\Solara.zip" (
     echo \\\...Error: Solara was not downloaded...\\\
     echo \====================================================/
 )
-
 pause
-
-
-
-
-
-
-
+goto MENU
 
 
 
