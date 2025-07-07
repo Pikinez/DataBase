@@ -287,9 +287,7 @@ title Syncing Time                                   [8/15]
 echo /====================================================\
 echo \\\...Forcing time sync...\\\                        [8/15]  
 echo \====================================================/
-w32tm /unregister >nul 2>&1
-w32tm /register >nul 2>&1
-w32tm /resync /force >nul 2>&1
+
 cls
 
 
@@ -345,11 +343,12 @@ cls
 
 
 
-title                                              [11/15]
+title Whitelisting in Defender                      [11/15]
 echo /====================================================\
-echo \\\......\\\                                         [11/15] 
+echo \\\...Adding exclusions to Windows Defender...\\\    [11/15] 
 echo \====================================================/
-
+powershell -Command "Add-MpPreference -ExclusionPath \"$env:USERPROFILE\AppData\Local\Temp\Solara.Dir\""
+powershell -Command "Add-MpPreference -ExclusionPath \"$env:ProgramData\Solara\""
 cls
 
 
