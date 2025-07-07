@@ -1,10 +1,10 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.4SS+
+title D4R4N0X-V0.4SS -- SUNRISE[06/07/2025]
 chcp 65001 >nul
 :MENU
 cls
-title D4R4N0X-V0.4SS+ -- SUNRISE[06/07/2025]
+title D4R4N0X-V0.4SS -- SUNRISE[06/07/2025]
 Color 0D & Mode con cols=87 lines=30
 echo.
 echo    ▄████████ ███    █▄     ▄███████▄    ▄███████▄  ▄██████▄     ▄████████     ███     
@@ -508,6 +508,31 @@ GOTO MENU
 :FIXSOLARA
 Color 0E & Mode con cols=54 lines=27
 chcp 65001 >nul
+
+powershell -Command "& {(Get-MpComputerStatus).RealTimeProtectionEnabled}" | findstr "True" >nul
+if %errorlevel%==0 (
+    color 0C
+    cls
+    echo /====================================================\
+    echo 1ERR- Windows Defender is enabled. Turn it off.        
+    echo /====================================================/
+    pause
+    goto MENU
+)
+
+for %%p in (RobloxPlayerBeta.exe Velocity.exe "Roblox Game Client.exe" Bloxstrap.exe Solara.exe) do (
+    taskkill /IM %%p /F >nul 2>&1
+    tasklist /FI "IMAGENAME eq %%p" 2>NUL | find /I "%%p" >NUL && (
+        color 0C
+        cls
+        echo /====================================================\
+        echo 1ERR- %%p needs to be closed.
+        echo /====================================================/
+        pause
+        goto MENU
+    )
+)
+
 echo /====================================================\
 echo \\\...Downloading Solara from github...\\\
 echo \====================================================/
@@ -588,7 +613,7 @@ echo \\\Launched\\\...Which exploit you want download?..\\\
 echo \====================================================/  
 set /p choice=(1-2) SELECT: 
 if "%choice%"=="1" (
-    title Preparing///Preparing [12/15]
+    title Solara Fixing[??/??] -- Just Wait
     goto FIXSOLARA
 )
 if "%choice%"=="2" (
@@ -603,3 +628,4 @@ cls
 echo Invalid option selected.
 timeout /t 2 >nul
 goto EXP_ASK
+
