@@ -1,9 +1,8 @@
 @echo off
 set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
-title D4R4N0X-V0.4SS -- SUNRISE[06/07/2025]
-chcp 65001 >nul
 :MENU
 cls
+chcp 65001 >nul
 title D4R4N0X-V0.4SS -- SUNRISE[06/07/2025]
 Color 0D & Mode con cols=87 lines=30
 echo.
@@ -346,12 +345,11 @@ cls
 
 
 
-title Whitelisting in Defender                      [11/15]
+title                                              [11/15]
 echo /====================================================\
-echo \\\...Adding exclusions to Windows Defender...\\\    [11/15] 
+echo \\\......\\\                                         [11/15] 
 echo \====================================================/
-powershell -Command "Add-MpPreference -ExclusionPath \"$env:USERPROFILE\AppData\Local\Temp\Solara.Dir\""
-powershell -Command "Add-MpPreference -ExclusionPath \"$env:ProgramData\Solara\""
+
 cls
 
 
@@ -629,3 +627,4 @@ echo Invalid option selected.
 timeout /t 2 >nul
 goto EXP_ASK
 
+goto MENU
