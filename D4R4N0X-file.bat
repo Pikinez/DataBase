@@ -3,7 +3,7 @@ set "powershellPath=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
 :MENU
 cls
 chcp 65001 >nul
-title D4R4N0X-V0.4SS -- SUNRISE[06/07/2025]
+title D4R4N0X-V0.4SS -- SUNRISE[20/07/2025]
 Color 0D & Mode con cols=87 lines=30
 echo.
 echo    ▄████████ ███    █▄     ▄███████▄    ▄███████▄  ▄██████▄     ▄████████     ███     
